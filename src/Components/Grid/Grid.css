@@ -2,15 +2,14 @@
   display: grid;
   position: absolute;
   border: rgb(247, 214, 214) 1px solid;
-  grid-gap: 1px;
 }
 
 .visiGrid {
-  z-index: 0;
+  z-index: 2;
 }
 
 .inviGrid {
-  border-color: none;
-  z-index: -1;
+  z-index: 1;
   background-color: cornflowerblue;
 }
+

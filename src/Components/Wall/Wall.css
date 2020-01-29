@@ -1,0 +1,56 @@
+.Wall {
+  /* background-color: red; */
+  height: 1rem;
+  width: 1rem;
+  align-items: center;
+}
+
+.hWall {
+  margin-top: .35rem;
+  width: 1rem;
+  height: .3rem;
+  background-color: black;
+  border: 0;
+}
+
+.vWall {
+  margin-left: .35rem;
+  height: 1rem;
+  width: .3rem;
+  background-color: black;
+  border: 0;
+}
+
+.trCorner {
+  height: .35rem;
+  width: .35rem;
+  border: black .3rem solid;
+  border-top: 0;
+  border-right: 0;
+  margin-left: .35rem;
+}
+.rdCorner {
+    height: .35rem;
+    width: .35rem;
+    border: black .3rem solid;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: .35rem;
+    margin-top: .35rem;
+}
+.dlCorner {
+    height: .35rem;
+    width: .35rem;
+    border: black .3rem solid;
+    border-bottom: 0;
+    border-left: 0;
+    margin-top: .35rem;
+}
+.ltCorner {
+    height: .35rem;
+    width: .35rem;
+    border: black .3rem solid;
+    border-top: 0;
+    border-left: 0;
+
+}

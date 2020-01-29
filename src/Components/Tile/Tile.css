@@ -1,6 +1,6 @@
-.Square {
-  height: 100%;
-  width: 100%;
+.Tile {
+  height: 1rem;
+  width: 1rem;
   margin: 0;
   padding: 0;
   border: 1px black solid;
