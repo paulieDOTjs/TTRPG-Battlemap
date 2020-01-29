@@ -1,12 +1,12 @@
 .Player {
-  border: solid 1px black;
-  border-radius: 50%;
-  width: 50%;
-  height: 50%;
-  display: grid;
-  grid-column-start: 3;
   align-self: center;
   justify-self: center;
-  align-items: center;
-  justify-items: center;
+  text-align: center;
+  height: 90%;
+  width: 90%;
+  border: solid 1px black;
+  border-radius: 50%;
+  margin-left: auto;
+  background-color: red;
 }
+

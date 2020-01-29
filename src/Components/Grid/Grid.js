@@ -2,6 +2,7 @@ import React from "react";
 import "./Grid.css";
 import Square from "../Square/Square";
 import Player from "../Player/Player";
+const gridSize = 4;
 
 function Grid(props) {
   const squares = [];
@@ -13,28 +14,28 @@ function Grid(props) {
     <>
       <div className="container">
         <div
-          className="Grid visiGrid"
-          style={{
-            gridTemplateColumns: `repeat(${props.numberOfColumns}, 1fr)`,
-            gridTemplateRows: `repeat(${props.numberOfRows}, 1fr)`,
-            height: `${props.numberOfRows * 3}rem`,
-            width: `${props.numberOfColumns * 3}rem`,
-            left:  `Calc(50% - ${props.numberOfColumns * 1.5}rem`
-          }}
-        >
-          {squares}
-        </div>
-        <div
           className="Grid inviGrid"
           style={{
             gridTemplateColumns: `repeat(${props.numberOfColumns}, 1fr)`,
             gridTemplateRows: `repeat(${props.numberOfRows}, 1fr)`,
-            height: `${props.numberOfRows * 3}rem`,
-            width: `${props.numberOfColumns * 3}rem`,
-            left:  `Calc(50% - ${props.numberOfColumns * 1.5}rem`
+            height: `${props.numberOfRows * gridSize}rem`,
+            width: `${props.numberOfColumns * gridSize}rem`,
+            left: `Calc(50% - ${props.numberOfColumns * (gridSize / 2)}rem`
           }}
         >
-          <Player />
+          <Player name="p1" player1={props.player1} />
+        </div>
+        <div
+          className="Grid visiGrid"
+          style={{
+            gridTemplateColumns: `repeat(${props.numberOfColumns}, 1fr)`,
+            gridTemplateRows: `repeat(${props.numberOfRows}, 1fr)`,
+            height: `${props.numberOfRows * gridSize}rem`,
+            width: `${props.numberOfColumns * gridSize}rem`,
+            left: `Calc(50% - ${props.numberOfColumns * (gridSize / 2)}rem`
+          }}
+        >
+          {squares}
         </div>
       </div>
     </>

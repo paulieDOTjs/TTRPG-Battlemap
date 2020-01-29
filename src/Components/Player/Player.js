@@ -1,10 +1,16 @@
-import React from 'react';
-import './Player.css';
+import React from "react";
+import "./Player.css";
 
-function Player() {
+function Player(props) {
   return (
-    <div className="Player">
-     P1
+    <div
+      className="Player"
+      style={{
+        gridColumnStart: props.player1.x,
+        gridRowStart: props.player1.y
+      }}
+    >
+      {props.name}
     </div>
   );
 }

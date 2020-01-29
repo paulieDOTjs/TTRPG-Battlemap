@@ -1,7 +1,8 @@
 .Grid {
   display: grid;
   position: absolute;
-  border: black 1px solid;
+  border: rgb(247, 214, 214) 1px solid;
+  grid-gap: 1px;
 }
 
 .visiGrid {
