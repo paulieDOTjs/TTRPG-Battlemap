@@ -1,0 +1,15 @@
+.Grid {
+  display: grid;
+  position: absolute;
+  border: black 1px solid;
+}
+
+.visiGrid {
+  z-index: 0;
+}
+
+.inviGrid {
+  border-color: none;
+  z-index: -1;
+  background-color: cornflowerblue;
+}
