@@ -2,7 +2,8 @@ import {
   SET_OBJECT,
   SELECT_OBJECT,
   MOVE_CHARACTER,
-  MOVE_BOARD
+  MOVE_BOARD,
+  TOGGLE_EDIT_MODE
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -15,6 +16,8 @@ export default function reducer(state, action) {
       return console.log(MOVE_CHARACTER);
     case MOVE_BOARD:
       return console.log(MOVE_BOARD);
+    case TOGGLE_EDIT_MODE:
+      return console.log(TOGGLE_EDIT_MODE);
     default:
       throw new Error("UNKOWN ACTION:", action.type);
   }

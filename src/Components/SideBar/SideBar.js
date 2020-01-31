@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./SideBar.css";
 
-import { EditContext } from "../../State/Context.js";
+import { GameContext } from "../../State/Context.js";
 import EditSideBar from "../EditSideBar/EditSideBar";
 import PlaySideBar from "../PlaySideBar/PlaySideBar";
 
 function SideBar(props) {
-  const { editable } = useContext(EditContext);
+  const { gameState } = useContext(GameContext);
 
   return (
     <section className="SideBar">
-      {(editable === true && <EditSideBar />) ||
-        (editable === false && <PlaySideBar />)}
+      {(gameState.editMode === true && <EditSideBar />) ||
+        (gameState.editMode === false && <PlaySideBar />)}
     </section>
   );
 }

@@ -1,41 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
 import Player from "../Player/Player";
+import GameProvider from "../../State/Context";
 
 const gridSize = 1;
 
-function Grid(props) {
+const numberOfColumns = 32;
+const numberOfRows = 32;
+
+function Grid() {
   const tiles = [];
-  for (let i = 0; i < props.numberOfRows * props.numberOfColumns; i++) {
-    const rowNumber = Math.floor(i / props.numberOfColumns) + 1;
-    const colNumber =
-      i + 1 - Math.floor((rowNumber - 1) * props.numberOfColumns);
+  for (let i = 0; i < numberOfRows * numberOfColumns; i++) {
+    const rowNumber = Math.floor(i / numberOfColumns) + 1;
+    const colNumber = i + 1 - Math.floor((rowNumber - 1) * numberOfColumns);
     const tileID = "Row" + rowNumber + "Col" + colNumber;
     tiles.push(
       <Tile
         id={tileID}
+        key={tileID}
         style={{
-          gridColumn: `${colNumber} / ${colNumber + 1}`,
-          gridRow: `${rowNumber} / ${rowNumber + 1}`
+          gridColumn: `${colNumber}`,
+          gridRow: `${rowNumber}`
         }}
       ></Tile>
     );
   }
 
   const styling = {
-    gridTemplateColumns: `repeat(${props.numberOfColumns}, auto)`,
-    gridTemplateRows: `repeat(${props.numberOfRows}, auto)`,
-    left: `Calc(50% - ${props.numberOfColumns * (gridSize / 2)}rem`
+    gridTemplateColumns: `repeat(${numberOfColumns}, auto)`,
+    gridTemplateRows: `repeat(${numberOfRows}, auto)`,
+    left: `Calc(50% - ${numberOfColumns * (gridSize / 2)}rem`
   };
 
   return (
     <div className="Grid visiGrid" style={styling}>
-      <Player
-        name="p1"
-        numberOfRows={props.numberOfRows}
-        numberOfColumns={props.numberOfColumns}
-      />
+      <GameProvider>
+        <Player
+          name="p1"
+          numberOfRows={numberOfRows}
+          numberOfColumns={numberOfColumns}
+        />
+      </GameProvider>
       {tiles}
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Wall.css";
 
 function Wall(props) {

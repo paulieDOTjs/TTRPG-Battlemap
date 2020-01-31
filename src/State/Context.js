@@ -1,24 +1,23 @@
-import React, { createContext, useState, useReducer } from "react";
+import React, { createContext, useState } from "react";
 
-import * as Actions from "./Actions";
-import Reducer from "./Reducer";
+import CreateState from "./CreateState";
 
-import useKeyboard from "../Hooks/useKeyboard";
+import UseKeyboard from "../Hooks/UseKeyboard";
 
-export const EditContext = createContext();
+export const GameContext = createContext();
 
-const EditingProvider = props => {
-  const [editable, setEditable] = useState(true);
+export default function GameProvider(props) {
+  const [gameState, setGameState] = useState(CreateState);
 
-  useKeyboard();
+  UseKeyboard(gameState, setGameState);
+
+  const value = { gameState, setGameState };
 
   return (
     <>
-      <EditContext.Provider value={{ editable, setEditable }}>
+      <GameContext.Provider value={value}>
         {props.children}
-      </EditContext.Provider>
+      </GameContext.Provider>
     </>
   );
-};
-
-export default EditingProvider;
+}

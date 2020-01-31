@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
-import { EditContext } from "../../State/Context.js";
+import GameProvider from "../../State/Context";
 
 function Tile(props) {
-  const { editable } = useContext(EditContext);
+  const editable = true;
 
   const [tiletype, setTileType] = useState("default");
 
@@ -43,12 +43,14 @@ function Tile(props) {
       onClick={(editable === true && makeWall) || sayHi}
       {...props}
     >
-      {(tiletype === "hWall" && <Wall wallClass="hWall" />) ||
-        (tiletype === "vWall" && <Wall wallClass="vWall" />) ||
-        (tiletype === "trCorner" && <Wall wallClass="trCorner" />) ||
-        (tiletype === "rdCorner" && <Wall wallClass="rdCorner" />) ||
-        (tiletype === "dlCorner" && <Wall wallClass="dlCorner" />) ||
-        (tiletype === "ltCorner" && <Wall wallClass="ltCorner" />)}
+      {/* <GameProvider> */}
+        {(tiletype === "hWall" && <Wall wallClass="hWall" />) ||
+          (tiletype === "vWall" && <Wall wallClass="vWall" />) ||
+          (tiletype === "trCorner" && <Wall wallClass="trCorner" />) ||
+          (tiletype === "rdCorner" && <Wall wallClass="rdCorner" />) ||
+          (tiletype === "dlCorner" && <Wall wallClass="dlCorner" />) ||
+          (tiletype === "ltCorner" && <Wall wallClass="ltCorner" />)}
+      {/* </GameProvider> */}
     </div>
   );
 }
