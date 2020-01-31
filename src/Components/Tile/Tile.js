@@ -1,56 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
-import GameProvider from "../../State/Context";
+import { tileMap } from "../../Utils/tileMap";
+
+import { GameContext } from "../../State/Context.js";
 
 function Tile(props) {
-  const editable = true;
+  const { gameState } = useContext(GameContext);
 
-  const [tiletype, setTileType] = useState("default");
+  const [tiletype, setTileType] = useState("0");
 
-  function makeWall() {
-    if (tiletype === "default") {
-      setTileType("hWall");
+  function editTile() {
+    if (tiletype === "0") {
+      setTileType("1");
     }
-    if (tiletype === "hWall") {
-      setTileType("vWall");
+    if (tiletype === "1") {
+      setTileType("2");
     }
-    if (tiletype === "vWall") {
-      setTileType("trCorner");
+    if (tiletype === "2") {
+      setTileType("3");
     }
-    if (tiletype === "trCorner") {
-      setTileType("rdCorner");
+    if (tiletype === "3") {
+      setTileType("4");
     }
-    if (tiletype === "rdCorner") {
-      setTileType("dlCorner");
+    if (tiletype === "4") {
+      setTileType("5");
     }
-    if (tiletype === "dlCorner") {
-      setTileType("ltCorner");
+    if (tiletype === "5") {
+      setTileType("6");
     }
-    if (tiletype === "ltCorner") {
-      setTileType("default");
+    if (tiletype === "6") {
+      setTileType("0");
     }
-  }
-
-  function sayHi() {
-    console.log("hi");
   }
 
   return (
     <div
       className="Tile"
       tiletype={tiletype}
-      onClick={(editable === true && makeWall) || sayHi}
+      data-passable={tileMap[tiletype].passable}
+      onClick={gameState.editMode ? editTile : null}
       {...props}
     >
-      {/* <GameProvider> */}
-        {(tiletype === "hWall" && <Wall wallClass="hWall" />) ||
-          (tiletype === "vWall" && <Wall wallClass="vWall" />) ||
-          (tiletype === "trCorner" && <Wall wallClass="trCorner" />) ||
-          (tiletype === "rdCorner" && <Wall wallClass="rdCorner" />) ||
-          (tiletype === "dlCorner" && <Wall wallClass="dlCorner" />) ||
-          (tiletype === "ltCorner" && <Wall wallClass="ltCorner" />)}
-      {/* </GameProvider> */}
+      {(tiletype === "1" && <Wall wallClass={tileMap[tiletype].className} />) ||
+        (tiletype === "2" && (
+          <Wall wallClass={tileMap[tiletype].className} />
+        )) ||
+        (tiletype === "3" && (
+          <Wall wallClass={tileMap[tiletype].className} />
+        )) ||
+        (tiletype === "4" && (
+          <Wall wallClass={tileMap[tiletype].className} />
+        )) ||
+        (tiletype === "5" && (
+          <Wall wallClass={tileMap[tiletype].className} />
+        )) ||
+        (tiletype === "6" && <Wall wallClass={tileMap[tiletype].className} />)}
     </div>
   );
 }

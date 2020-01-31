@@ -3,7 +3,9 @@ export default function createState(overrides) {
     mapPosition: { left: 0, top: 0 },
     player1position: { x: 1, y: 1 },
     editMode: true,
-    obstaclePositions: [],
+    tileMap: [],
+    numberOfCols: 32,
+    numberOfRows: 32,
     ...overrides
   };
 }
