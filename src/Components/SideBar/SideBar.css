@@ -1,0 +1,7 @@
+.SideBar {
+  width: 10%;
+  height: 100%;
+  border-right: black 4px solid;
+  position: absolute;
+  left: 0;
+}

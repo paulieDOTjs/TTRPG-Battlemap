@@ -2,6 +2,7 @@ import React from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
 import Player from "../Player/Player";
+
 const gridSize = 1;
 
 function Grid(props) {

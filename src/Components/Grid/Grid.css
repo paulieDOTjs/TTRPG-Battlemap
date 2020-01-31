@@ -1,15 +1,6 @@
 .Grid {
+  top: 100px;
   display: grid;
   position: absolute;
   border: rgb(247, 214, 214) 1px solid;
 }
-
-.visiGrid {
-  z-index: 2;
-}
-
-.inviGrid {
-  z-index: 1;
-  background-color: cornflowerblue;
-}
-

@@ -19,34 +19,34 @@ function Player(props) {
   }
   const [CurrentPosition, setPosition] = useState({ x: 1, y: 1 });
 
-  function handleKey(e) {
-    let newPosition = CurrentPosition;
-    if (e.code === "KeyQ" || e.code === "KeyA" || e.code === "KeyZ") {
-      newPosition.x--;
-      keepInGrid(newPosition);
-      setPosition({ ...newPosition });
-    }
-    if (e.code === "KeyE" || e.code === "KeyD" || e.code === "KeyX") {
-      newPosition.x++;
-      keepInGrid(newPosition);
-      setPosition({ ...newPosition });
-    }
-    if (e.code === "KeyS" || e.code === "KeyZ" || e.code === "KeyX") {
-      newPosition.y++;
-      keepInGrid(newPosition);
-      setPosition({ ...newPosition });
-    }
-    if (e.code === "KeyQ" || e.code === "KeyW" || e.code === "KeyE") {
-      newPosition.y--;
-      keepInGrid(newPosition);
-      setPosition({ ...newPosition });
-    }
-  }
+  // function handleKey(e) {
+  //   let newPosition = CurrentPosition;
+  //   if (e.code === "KeyQ" || e.code === "KeyA" || e.code === "KeyZ") {
+  //     newPosition.x--;
+  //     keepInGrid(newPosition);
+  //     setPosition({ ...newPosition });
+  //   }
+  //   if (e.code === "KeyE" || e.code === "KeyD" || e.code === "KeyX") {
+  //     newPosition.x++;
+  //     keepInGrid(newPosition);
+  //     setPosition({ ...newPosition });
+  //   }
+  //   if (e.code === "KeyS" || e.code === "KeyZ" || e.code === "KeyX") {
+  //     newPosition.y++;
+  //     keepInGrid(newPosition);
+  //     setPosition({ ...newPosition });
+  //   }
+  //   if (e.code === "KeyQ" || e.code === "KeyW" || e.code === "KeyE") {
+  //     newPosition.y--;
+  //     keepInGrid(newPosition);
+  //     setPosition({ ...newPosition });
+  //   }
+  // }
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [CurrentPosition]);
+  // useEffect(() => {
+  //   window.addEventListener("keydown", handleKey);
+  //   return () => window.removeEventListener("keydown", handleKey);
+  // });
 
   return (
     <div

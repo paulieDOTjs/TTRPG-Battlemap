@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
+import { EditContext } from "../../State/Context.js";
 
 function Tile(props) {
+  const { editable } = useContext(EditContext);
+
   const [tiletype, setTileType] = useState("default");
 
   function makeWall() {
@@ -29,8 +32,17 @@ function Tile(props) {
     }
   }
 
+  function sayHi() {
+    console.log("hi");
+  }
+
   return (
-    <div className="Tile" tiletype={tiletype} onClick={makeWall} {...props}>
+    <div
+      className="Tile"
+      tiletype={tiletype}
+      onClick={(editable === true && makeWall) || sayHi}
+      {...props}
+    >
       {(tiletype === "hWall" && <Wall wallClass="hWall" />) ||
         (tiletype === "vWall" && <Wall wallClass="vWall" />) ||
         (tiletype === "trCorner" && <Wall wallClass="trCorner" />) ||
