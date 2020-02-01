@@ -1,6 +1,6 @@
 import React from "react";
 import "./View.css";
-import EditGrid from "../EditGrid/EditGrid";
+import Grid from "../Grid/Grid";
 import ButtonEdit from "../ButtonEdit/ButtonEdit";
 import ButtonMap from "../ButtonMap/ButtonMap";
 import SideBar from "../SideBar/SideBar";
@@ -12,7 +12,7 @@ function View(props) {
     <div className="View">
       <GameProvider>
         <ButtonMap />
-        <EditGrid />
+        <Grid />
         <Header />
         <ButtonEdit />
         <SideBar />

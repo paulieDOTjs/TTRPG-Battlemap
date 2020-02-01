@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
 import { tileMap } from "../../Utils/tileMap";
@@ -9,55 +9,59 @@ import { GameContext } from "../../State/Context.js";
 function Tile(props) {
   const { state } = useContext(GameContext);
 
-  const [tiletype, setTileType] = useState("0");
+  /***************************************************
+   * saving variable of how the string is written on
+   * the component since "-" can't be used in js
+   *************************************************/
+  const dataRow = "data-row";
+  const dataCol = "data-col";
 
-  function editTile() {
-    if (tiletype === "0") {
-      setTileType("1");
-    }
-    if (tiletype === "1") {
-      setTileType("2");
-    }
-    if (tiletype === "2") {
-      setTileType("3");
-    }
-    if (tiletype === "3") {
-      setTileType("4");
-    }
-    if (tiletype === "4") {
-      setTileType("5");
-    }
-    if (tiletype === "5") {
-      setTileType("6");
-    }
-    if (tiletype === "6") {
-      setTileType("0");
-    }
-  }
+  /*****************************************************
+   * These are the row number and column number of this
+   * individual tile
+   *****************************************************/
+  const thisTileRow = props[dataRow];
+  const thisTileCol = props[dataCol];
+
+  /*************************************************
+   * This is the tile map of the row that this tile
+   * is a part of.
+   ************************************************/
+  const tileMapThisRow = state.tileMap[thisTileRow - 1];
+
+  /*************************************************
+   * This is the individual character of the tile map
+   * that represents this individual tile
+   *************************************************/
+  const tileMapThisRowAndCol = tileMapThisRow.charAt(thisTileCol - 1);
 
   return (
     <div
       className="Tile"
-      tiletype={tiletype}
-      data-action={Actions.SET_OBJECT}
-      data-passable={tileMap[tiletype].passable}
+      tiletype={tileMapThisRowAndCol}
       data-clickable={true}
+      data-action={Actions.SET_OBJECT}
+      data-passable={tileMap[tileMapThisRowAndCol].passable}
       {...props}
     >
-      {(tiletype === "1" && <Wall wallClass={tileMap[tiletype].className} />) ||
-        (tiletype === "2" && (
-          <Wall wallClass={tileMap[tiletype].className} />
+      {(tileMapThisRowAndCol === "1" && (
+        <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
+      )) ||
+        (tileMapThisRowAndCol === "2" && (
+          <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
         )) ||
-        (tiletype === "3" && (
-          <Wall wallClass={tileMap[tiletype].className} />
+        (tileMapThisRowAndCol === "3" && (
+          <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
         )) ||
-        (tiletype === "4" && (
-          <Wall wallClass={tileMap[tiletype].className} />
+        (tileMapThisRowAndCol === "4" && (
+          <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
         )) ||
-        (tiletype === "5" && (
-          <Wall wallClass={tileMap[tiletype].className} />
+        (tileMapThisRowAndCol === "5" && (
+          <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
         )) ||
-        (tiletype === "6" && <Wall wallClass={tileMap[tiletype].className} />)}
+        (tileMapThisRowAndCol === "6" && (
+          <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
+        ))}
     </div>
   );
 }

@@ -4,6 +4,7 @@
   height: 0.5rem;
   background-color: black;
   border: 0;
+  z-index: -1;
 }
 
 .vWall {
