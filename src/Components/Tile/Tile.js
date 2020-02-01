@@ -2,11 +2,12 @@ import React, { useState, useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
 import { tileMap } from "../../Utils/tileMap";
+import * as Actions from "../../State/Actions";
 
 import { GameContext } from "../../State/Context.js";
 
 function Tile(props) {
-  const { gameState } = useContext(GameContext);
+  const { state } = useContext(GameContext);
 
   const [tiletype, setTileType] = useState("0");
 
@@ -38,8 +39,9 @@ function Tile(props) {
     <div
       className="Tile"
       tiletype={tiletype}
+      data-action={Actions.SET_OBJECT}
       data-passable={tileMap[tiletype].passable}
-      onClick={gameState.editMode ? editTile : null}
+      data-clickable={true}
       {...props}
     >
       {(tiletype === "1" && <Wall wallClass={tileMap[tiletype].className} />) ||

@@ -6,12 +6,12 @@ import EditSideBar from "../EditSideBar/EditSideBar";
 import PlaySideBar from "../PlaySideBar/PlaySideBar";
 
 function SideBar(props) {
-  const { gameState } = useContext(GameContext);
+  const { state } = useContext(GameContext);
 
   return (
     <section className="SideBar">
-      {(gameState.editMode === true && <EditSideBar />) ||
-        (gameState.editMode === false && <PlaySideBar />)}
+      {(state.editMode === true && <EditSideBar />) ||
+        (state.editMode === false && <PlaySideBar />)}
     </section>
   );
 }
