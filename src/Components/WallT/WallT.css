@@ -1,0 +1,66 @@
+.WallT{
+    z-index: -1;
+}
+
+.noLTWallMain,
+.noRTWallMain {
+  position: absolute;
+  height: 1.1rem;
+  width: 0.5rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+  margin-left: 0.225rem;
+}
+
+.noTTWallMain,
+.noDTWallMain {
+  position: absolute;
+  width: 1.1rem;
+  height: 0.5rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+  margin-top: 0.225rem;
+}
+.noLTWallSecondary {
+  position: absolute;
+  margin-top: 0.25rem;
+  margin-left: 0.7rem;
+  width: 0.3rem;
+  height: 0.5rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+}
+
+.noRTWallSecondary {
+  position: absolute;
+  margin-top: 0.25rem;
+  width: 0.3rem;
+  height: 0.5rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+}
+
+.noTTWallSecondary {
+  position: absolute;
+  margin-top: 0.75rem;
+  margin-left: 0.225rem;
+  width: 0.5rem;
+  height: 0.3rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+}
+
+.noDTWallSecondary {
+  position: absolute;
+  margin-left: 0.225rem;
+  width: 0.5rem;
+  height: 0.3rem;
+  z-index: -1;
+  background-color: black;
+  border: 0;
+}

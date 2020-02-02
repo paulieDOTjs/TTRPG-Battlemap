@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
+import WallT from "../WallT/WallT";
 import { tileMap } from "../../Utils/tileMap";
 import * as Actions from "../../State/Actions";
 
@@ -61,7 +62,23 @@ function Tile(props) {
         )) ||
         (tileMapThisRowAndCol === "6" && (
           <Wall wallClass={tileMap[tileMapThisRowAndCol].className} />
-        ))}
+        )) ||
+        (tileMapThisRowAndCol === "7" && (
+          <WallT wallClass={tileMap[tileMapThisRowAndCol].className} />
+        )) ||
+        (tileMapThisRowAndCol === "8" && (
+          <WallT wallClass={tileMap[tileMapThisRowAndCol].className} />
+        )) ||
+        (tileMapThisRowAndCol === "9" && (
+          <WallT wallClass={tileMap[tileMapThisRowAndCol].className} />
+        )) ||
+        (tileMapThisRowAndCol === "Q" && (
+          <WallT wallClass={tileMap[tileMapThisRowAndCol].className} />
+        ))
+        
+        
+        
+        }
     </div>
   );
 }

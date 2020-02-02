@@ -8,11 +8,9 @@ import { GameContext } from "../../State/Context.js";
 function ButtonEdit(props) {
   const { state } = useContext(GameContext);
   return (
-    <Button
-      className="ButtonEdit"
-      data-action={Actions.TOGGLE_EDIT_MODE}
-      name={state.editMode ? "Play Mode" : "Edit Mode"}
-    ></Button>
+    <Button className="ButtonEdit" data-action={Actions.TOGGLE_EDIT_MODE}>
+      {state.editMode ? "Play Mode" : "Edit Mode"}
+    </Button>
   );
 }
 

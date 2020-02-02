@@ -2,7 +2,8 @@ import {
   MOVE_CHARACTER,
   CREATE_MAP,
   SET_OBJECT,
-  TOGGLE_EDIT_MODE
+  TOGGLE_EDIT_MODE,
+  SELECT_OBJECT
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -10,6 +11,14 @@ export default function reducer(state, action) {
   switch (action.type) {
     case MOVE_CHARACTER:
       return { ...state, player1position: action.payload };
+
+    case SELECT_OBJECT:
+      const newSelectedObject = action.payload.target.dataset.tiletype;
+      console.log(newSelectedObject);
+      return {
+        ...state,
+        selectedObject: action.payload.target.dataset.tiletype
+      };
 
     /*************************
      * This sets the currently

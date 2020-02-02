@@ -16,9 +16,9 @@ const initialState = {
   numberOfRows: 32,
   player1position: { x: 1, y: 1 },
   tileMap: [
+    "0123456789Q000000000000000000000",
     "00000000000000000000000000000000",
-    "00000000000000000000000000000000",
-    "00000000000000000000000000000000",
+    "00000000000000200000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
@@ -95,7 +95,12 @@ export default function GameProvider(props) {
     });
   }
 
-  function test(e) {
+  useEffect(() => {
+    window.addEventListener("keydown", HandleKey);
+    return () => window.removeEventListener("keydown", HandleKey);
+  }, []);
+
+  function handleClick(e) {
     if (e.toElement.dataset.clickable) {
       dispatch({
         type: e.toElement.dataset.action,
@@ -105,13 +110,8 @@ export default function GameProvider(props) {
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", HandleKey);
-    return () => window.removeEventListener("keydown", HandleKey);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("click", test);
-    return () => window.removeEventListener("keydown", test);
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("keydown", handleClick);
   }, []);
 
   const value = { state, dispatch, Actions };

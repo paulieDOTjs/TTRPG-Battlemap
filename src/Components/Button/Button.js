@@ -8,7 +8,7 @@ function Button(props) {
       data-clickable={true}
       {...props}
     >
-      {props.name}
+      {props.children}
     </button>
   );
 }
