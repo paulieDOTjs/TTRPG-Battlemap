@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./ObjectSelector.css";
 import * as Actions from "../../State/Actions";
-import { tileMap } from "../../Utils/tileMap";
+import { tileMapDirectory } from "../../Utils/tileMapDirectory";
 
 import { GameContext } from "../../State/Context.js";
 
@@ -10,12 +10,12 @@ function ObjectSelector(props) {
   return (
     <div
       className="ObjectSelector"
-      {...props}
       data-clickable={true}
       data-action={Actions.SELECT_OBJECT}
       data-tiletype={props.tiletype}
+      {...props}
     >
-      {tileMap[props.tiletype].className}
+      {tileMapDirectory[props.tiletype].pseudoName}
     </div>
   );
 }

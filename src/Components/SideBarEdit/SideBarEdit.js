@@ -4,19 +4,26 @@ import ObjectSelector from "../ObjectSelector/ObjectSelector";
 
 function SideBarEdit(props) {
   return (
-    <div className="SideBarEdit">
-      <h1>EDIT MODE</h1>
-      <ObjectSelector tiletype="0" />
-      <ObjectSelector tiletype="1" />
-      <ObjectSelector tiletype="2" />
-      <ObjectSelector tiletype="3" />
-      <ObjectSelector tiletype="4" />
-      <ObjectSelector tiletype="5" />
-      <ObjectSelector tiletype="6" />
-      <ObjectSelector tiletype="7" />
-      <ObjectSelector tiletype="8" />
-      <ObjectSelector tiletype="9" />
-      <ObjectSelector tiletype="Q" />
+    <div className="SideBarEdit container">
+      <div className="row">
+        <div className="col">
+          <h1 className="SideBarHeadline">EDIT MODE</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6">
+          <ObjectSelector tiletype="0" />
+        </div>
+        <div className="col-6">
+          <ObjectSelector tiletype="1" />
+        </div>
+        <div className="col-6">
+          <ObjectSelector tiletype="3" />
+        </div>
+        <div className="col-6">
+          <ObjectSelector tiletype="7" />
+        </div>
+      </div>
     </div>
   );
 }

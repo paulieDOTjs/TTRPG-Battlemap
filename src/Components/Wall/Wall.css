@@ -1,5 +1,4 @@
-.hWall,
-.vWall {
+.hWall {
   margin-top: 0.225rem;
   width: 1.1rem;
   height: 0.5rem;
@@ -9,7 +8,12 @@
 }
 
 .vWall {
-  transform: rotate(90deg);
+  margin-left: 0.225rem;
+  height: 1.1rem;
+  width: 0.5rem;
+  background-color: black;
+  border: 0;
+  z-index: -1;
 }
 
 .trCornerWall {

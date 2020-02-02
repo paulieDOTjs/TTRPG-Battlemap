@@ -16,9 +16,10 @@ const initialState = {
   numberOfRows: 32,
   player1position: { x: 1, y: 1 },
   tileMap: [
-    "0123456789Q000000000000000000000",
+
     "00000000000000000000000000000000",
-    "00000000000000200000000000000000",
+    "00000000000000000000000000000000",
+    "00000000000000000000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
@@ -49,49 +50,16 @@ const initialState = {
     "00000000000000000000000000000000",
     "00000000000000000000000000000000"
   ],
-  selectedObject: 1
+  selectedCharacter: 0
 };
 
 export default function GameProvider(props) {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  function keepInGrid(object) {
-    if (object.x < 1) {
-      object.x = 1;
-    }
-    if (object.y < 1) {
-      object.y = 1;
-    }
-    if (object.x > state.numberOfCols) {
-      object.x = state.numberOfCols;
-    }
-    if (object.y > state.numberOfRows) {
-      object.y = state.numberOfRows;
-    }
-    return object;
-  }
-
   function HandleKey(e) {
-    let newPosition = state.player1position;
-    if (e.code === "KeyQ" || e.code === "KeyA" || e.code === "KeyZ") {
-      newPosition.x--;
-      keepInGrid(newPosition);
-    }
-    if (e.code === "KeyE" || e.code === "KeyD" || e.code === "KeyX") {
-      newPosition.x++;
-      keepInGrid(newPosition);
-    }
-    if (e.code === "KeyS" || e.code === "KeyZ" || e.code === "KeyX") {
-      newPosition.y++;
-      keepInGrid(newPosition);
-    }
-    if (e.code === "KeyQ" || e.code === "KeyW" || e.code === "KeyE") {
-      newPosition.y--;
-      keepInGrid(newPosition);
-    }
     dispatch({
       type: Actions.MOVE_CHARACTER,
-      payload: newPosition
+      payload: e.code
     });
   }
 
@@ -101,9 +69,9 @@ export default function GameProvider(props) {
   }, []);
 
   function handleClick(e) {
-    if (e.toElement.dataset.clickable) {
+    if (e.target.dataset.clickable) {
       dispatch({
-        type: e.toElement.dataset.action,
+        type: e.target.dataset.action,
         payload: e
       });
     }
