@@ -26,14 +26,19 @@ export default function reducer(state, action) {
         }
         return object;
       }
-      const tileMap = state.tileMap
+      const tileMap = state.tileMap;
       let newPosition = state.player1position;
       if (
         action.payload === "KeyQ" ||
         action.payload === "KeyA" ||
         action.payload === "KeyZ"
       ) {
-        newPosition.x--;
+        const desiredTileValue = tileMap[newPosition.y - 1].charAt(
+          newPosition.x - 2
+        );
+        if (tileMapDirectory[desiredTileValue].passable) {
+          newPosition.x--;
+        }
         keepInGrid(newPosition);
       }
       if (
@@ -41,7 +46,12 @@ export default function reducer(state, action) {
         action.payload === "KeyD" ||
         action.payload === "KeyX"
       ) {
-        newPosition.x++;
+        const desiredTileValue = tileMap[newPosition.y - 1].charAt(
+          newPosition.x
+        );
+        if (tileMapDirectory[desiredTileValue].passable) {
+          newPosition.x++;
+        }
         keepInGrid(newPosition);
       }
       if (
@@ -49,7 +59,12 @@ export default function reducer(state, action) {
         action.payload === "KeyZ" ||
         action.payload === "KeyX"
       ) {
-        newPosition.y++;
+        const desiredTileValue = tileMap[newPosition.y].charAt(
+          newPosition.x - 1
+        );
+        if (tileMapDirectory[desiredTileValue].passable) {
+          newPosition.y++;
+        }
         keepInGrid(newPosition);
       }
       if (
@@ -57,7 +72,12 @@ export default function reducer(state, action) {
         action.payload === "KeyW" ||
         action.payload === "KeyE"
       ) {
-        newPosition.y--;
+        const desiredTileValue = tileMap[newPosition.y - 2].charAt(
+          newPosition.x - 1
+        );
+        if (tileMapDirectory[desiredTileValue].passable) {
+          newPosition.y--;
+        }
         keepInGrid(newPosition);
       }
       return { ...state, player1position: newPosition };
