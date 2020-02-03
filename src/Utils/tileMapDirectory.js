@@ -2,7 +2,7 @@ export const tileMapDirectory = {
   "0": {
     className: "default",
     next: "0",
-    pseudoName: "Nothing",
+    pseudoName: "Erase",
     passable: true
   },
   "1": { className: "hWall", next: "2", pseudoName: "Wall", passable: false },

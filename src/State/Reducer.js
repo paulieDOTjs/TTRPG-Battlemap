@@ -11,6 +11,10 @@ export default function reducer(state, action) {
   console.log(state);
   switch (action.type) {
     case MOVE_CHARACTER:
+      /********************************
+       * This function keeps the player
+       * inside the playable grid
+       *********************************/
       function keepInGrid(object) {
         if (object.x < 1) {
           object.x = 1;
@@ -26,65 +30,87 @@ export default function reducer(state, action) {
         }
         return object;
       }
+
+      //Pulls in the tile map from state
       const tileMap = state.tileMap;
+
+      //Pulls in current position from state to do some math on
       let newPosition = state.player1position;
       if (
         action.payload === "KeyQ" ||
         action.payload === "KeyA" ||
         action.payload === "KeyZ"
       ) {
-        const desiredTileValue = tileMap[newPosition.y - 1].charAt(
-          newPosition.x - 2
-        );
-        if (tileMapDirectory[desiredTileValue].passable) {
-          newPosition.x--;
+        //Gets the value of the tile that the character is trying to move to
+        try {
+          let desiredTileValue = tileMap[newPosition.y - 1].charAt(
+            newPosition.x - 2
+          );
+
+          //Checks the tileMapDirectory to see if it's a passable tile
+          if (tileMapDirectory[desiredTileValue].passable) {
+            newPosition.x--;
+          }
+          keepInGrid(newPosition);
+        } catch {
+          keepInGrid(newPosition);
         }
-        keepInGrid(newPosition);
       }
       if (
         action.payload === "KeyE" ||
         action.payload === "KeyD" ||
         action.payload === "KeyX"
       ) {
-        const desiredTileValue = tileMap[newPosition.y - 1].charAt(
-          newPosition.x
-        );
-        if (tileMapDirectory[desiredTileValue].passable) {
-          newPosition.x++;
+        try {
+          let desiredTileValue = tileMap[newPosition.y - 1].charAt(
+            newPosition.x
+          );
+          if (tileMapDirectory[desiredTileValue].passable) {
+            newPosition.x++;
+          }
+          keepInGrid(newPosition);
+        } catch {
+          keepInGrid(newPosition);
         }
-        keepInGrid(newPosition);
       }
       if (
         action.payload === "KeyS" ||
         action.payload === "KeyZ" ||
         action.payload === "KeyX"
       ) {
-        const desiredTileValue = tileMap[newPosition.y].charAt(
-          newPosition.x - 1
-        );
-        if (tileMapDirectory[desiredTileValue].passable) {
-          newPosition.y++;
+        try {
+          let desiredTileValue = tileMap[newPosition.y].charAt(
+            newPosition.x - 1
+          );
+          if (tileMapDirectory[desiredTileValue].passable) {
+            newPosition.y++;
+          }
+          keepInGrid(newPosition);
+        } catch {
+          keepInGrid(newPosition);
         }
-        keepInGrid(newPosition);
       }
       if (
         action.payload === "KeyQ" ||
         action.payload === "KeyW" ||
         action.payload === "KeyE"
       ) {
-        const desiredTileValue = tileMap[newPosition.y - 2].charAt(
-          newPosition.x - 1
-        );
-        if (tileMapDirectory[desiredTileValue].passable) {
-          newPosition.y--;
+        try {
+          let desiredTileValue = tileMap[newPosition.y - 2].charAt(
+            newPosition.x - 1
+          );
+          if (tileMapDirectory[desiredTileValue].passable) {
+            newPosition.y--;
+          }
+          keepInGrid(newPosition);
+        } catch {
+          keepInGrid(newPosition);
         }
-        keepInGrid(newPosition);
       }
       return { ...state, player1position: newPosition };
 
     case SELECT_OBJECT:
       const newSelectedCharacter = action.payload.target.dataset.tiletype;
-      console.log(newSelectedCharacter);
       return {
         ...state,
         selectedCharacter: action.payload.target.dataset.tiletype
@@ -96,7 +122,6 @@ export default function reducer(state, action) {
      * something on the grid
      *************************/
     case SET_OBJECT:
-      // console.log(action.payload);
       //gets current tile map
       const newTileMap = [...state.tileMap];
       //gets the row number based on the tile clicked
@@ -112,7 +137,6 @@ export default function reducer(state, action) {
       let selectedCharacter = state.selectedCharacter;
       if (currentCharacter == selectedCharacter) {
         selectedCharacter = tileMapDirectory[selectedCharacter].next;
-        console.log(selectedCharacter);
       }
 
       //The new row with the changed string
