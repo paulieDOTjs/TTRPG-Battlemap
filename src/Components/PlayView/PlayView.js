@@ -1,5 +1,5 @@
 import React from "react";
-import "./View.css";
+import "./PlayView.css";
 import Grid from "../Grid/Grid";
 import ButtonEdit from "../ButtonEdit/ButtonEdit";
 import ButtonMap from "../ButtonMap/ButtonMap";
@@ -7,9 +7,9 @@ import SideBar from "../SideBar/SideBar";
 import Header from "../Header/Header";
 import GameProvider from "../../State/Context";
 
-function View(props) {
+function PlayView(props) {
   return (
-    <div className="View">
+    <div className="PlayView">
       <GameProvider>
         <ButtonMap />
         <Grid />
@@ -21,4 +21,4 @@ function View(props) {
   );
 }
 
-export default View;
+export default PlayView;

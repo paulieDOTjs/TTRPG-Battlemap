@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
 import WallT from "../WallT/WallT";
+import WallX from "../WallX/WallX";
 import { tileMapDirectory } from "../../Utils/tileMapDirectory";
 import * as Actions from "../../State/Actions";
 
@@ -41,7 +42,7 @@ function Tile(props) {
       className="Tile"
       tiletype={tileMapThisRowAndCol}
       data-clickable={true}
-      data-action={Actions.SET_OBJECT}
+      data-action={state.editMode ? Actions.SET_OBJECT : Actions.SET_CHARACTER}
       data-passable={tileMapDirectory[tileMapThisRowAndCol].passable}
       {...props}
     >
@@ -74,11 +75,10 @@ function Tile(props) {
         )) ||
         (tileMapThisRowAndCol === "Q" && (
           <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        ))
-        
-        
-        
-        }
+        )) ||
+        (tileMapThisRowAndCol === "W" && (
+          <WallX wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
+        ))}
     </div>
   );
 }

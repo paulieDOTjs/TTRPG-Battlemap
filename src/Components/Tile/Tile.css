@@ -3,6 +3,7 @@
   width: 1rem;
   margin: 0;
   padding: 0;
-  border: 1px black solid;
+  border: 1px grey solid;
   display: grid;
+  cursor: crosshair;
 }

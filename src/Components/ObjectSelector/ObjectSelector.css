@@ -1,3 +1,11 @@
-.ObjectSelector{
-    cursor: pointer;
+.ObjectSelector {
+  cursor: pointer;
+  text-align: center;
+  border: black 2px solid;
+  border-radius: 4px;
+}
+
+.Highlight {
+  background-color: black;
+  color: white;
 }

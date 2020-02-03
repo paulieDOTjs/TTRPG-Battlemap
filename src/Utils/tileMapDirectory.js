@@ -49,5 +49,11 @@ export const tileMapDirectory = {
     pseudoName: "T-Wall",
     passable: false
   },
-  Q: { className: "noDTWall", next: "7", pseudoName: "T-Wall", passable: false }
+  Q: {
+    className: "noDTWall",
+    next: "7",
+    pseudoName: "T-Wall",
+    passable: false
+  },
+  W: { className: "WallX", next: "W", pseudoName: "X-Wall", passable: false }
 };

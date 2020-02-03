@@ -3,13 +3,17 @@ import {
   CREATE_MAP,
   SET_OBJECT,
   TOGGLE_EDIT_MODE,
-  SELECT_OBJECT
+  SELECT_OBJECT,
+  SET_CHARACTER
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
-  console.log(state);
+  // console.log(state);
   switch (action.type) {
+    case SET_CHARACTER:
+      console.log("character jump");
+      return { ...state };
     case MOVE_CHARACTER:
       /********************************
        * This function keeps the player
@@ -110,10 +114,9 @@ export default function reducer(state, action) {
       return { ...state, player1position: newPosition };
 
     case SELECT_OBJECT:
-      const newSelectedCharacter = action.payload.target.dataset.tiletype;
       return {
         ...state,
-        selectedCharacter: action.payload.target.dataset.tiletype
+        selectedObject: action.payload.target.dataset.tiletype
       };
 
     /*************************
@@ -132,17 +135,17 @@ export default function reducer(state, action) {
       const currentRow = state.tileMap[changingRow];
 
       //The character that is currently at that place in the tilemap/
-      const currentCharacter = currentRow.charAt(changingCol);
+      const currentObject = currentRow.charAt(changingCol);
       //The character in state that is currently wanting to replace what is in the tilemap.
-      let selectedCharacter = state.selectedCharacter;
-      if (currentCharacter == selectedCharacter) {
-        selectedCharacter = tileMapDirectory[selectedCharacter].next;
+      let selectedObject = state.selectedObject;
+      if (currentObject == selectedObject) {
+        selectedObject = tileMapDirectory[selectedObject].next;
       }
 
       //The new row with the changed string
       const newRow =
         currentRow.substring(0, changingCol) +
-        selectedCharacter +
+        selectedObject +
         currentRow.substring(changingCol + 1);
 
       //The new tileMap updated with the new row
@@ -150,7 +153,7 @@ export default function reducer(state, action) {
       return {
         ...state,
         tileMap: newTileMap,
-        selectedCharacter: selectedCharacter
+        selectedObject: selectedObject
       };
 
     //Changes the game between play or edit mode

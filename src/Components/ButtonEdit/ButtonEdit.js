@@ -9,7 +9,7 @@ function ButtonEdit(props) {
   const { state } = useContext(GameContext);
   return (
     <Button className="ButtonEdit" data-action={Actions.TOGGLE_EDIT_MODE}>
-      {state.editMode ? "Play Mode" : "Edit Mode"}
+      {state.editMode ? "Play View" : "Edit View"}
     </Button>
   );
 }

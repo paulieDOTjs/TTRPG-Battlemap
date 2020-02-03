@@ -9,7 +9,12 @@ function ObjectSelector(props) {
   const { state } = useContext(GameContext);
   return (
     <div
-      className="ObjectSelector"
+      className={
+        tileMapDirectory[props.tiletype].pseudoName ===
+        tileMapDirectory[state.selectedObject].pseudoName
+          ? "Highlight ObjectSelector"
+          : "ObjectSelector"
+      }
       data-clickable={true}
       data-action={Actions.SELECT_OBJECT}
       data-tiletype={props.tiletype}

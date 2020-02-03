@@ -15,8 +15,8 @@ const initialState = {
   numberOfCols: 32,
   numberOfRows: 32,
   player1position: { x: 1, y: 1 },
+  selectedObject: 0,
   tileMap: [
-
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
@@ -49,8 +49,7 @@ const initialState = {
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
     "00000000000000000000000000000000"
-  ],
-  selectedCharacter: 0
+  ]
 };
 
 export default function GameProvider(props) {

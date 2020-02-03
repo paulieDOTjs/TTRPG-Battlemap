@@ -1,5 +1,7 @@
 .SideBarEdit {
-  width: 100%;
+  width: 8rem;
   height: 100%;
-  background-color: red;
+  border-right: 4px solid;
+  border-color: none;
+  margin: 0;
 }

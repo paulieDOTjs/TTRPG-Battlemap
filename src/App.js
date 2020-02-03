@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import View from "./Components/View/View";
+import PlayView from "./Components/PlayView/PlayView";
 import axios from "axios";
 
 function App(props) {
@@ -21,7 +21,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <View />
+      <PlayView />
     </div>
   );
 }
