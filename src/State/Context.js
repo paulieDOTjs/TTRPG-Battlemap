@@ -15,7 +15,7 @@ const initialState = {
   numberOfCols: 32,
   numberOfRows: 32,
   player1position: { x: 1, y: 1 },
-  selectedObject: 0,
+  selectedObject: 1,
   tileMap: [
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
@@ -78,7 +78,7 @@ export default function GameProvider(props) {
 
   useEffect(() => {
     window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("keydown", handleClick);
+    return () => window.removeEventListener("click", handleClick);
   }, []);
 
   const value = { state, dispatch, Actions };

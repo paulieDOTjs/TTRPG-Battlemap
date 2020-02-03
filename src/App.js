@@ -1,10 +1,15 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import PlayView from "./Components/PlayView/PlayView";
 import axios from "axios";
+import Header from "./Components/Header/Header";
+import GameProvider from "./State/Context";
+import LoginPage from "./Pages/LoginPage/LoginPage";
+import PlayPage from "./Pages/PlayPage/PlayPage";
+import HomePage from "./Pages/HomePage/HomePage";
+import SignupPage from "./Pages/SignupPage/SignupPage";
 
 function App(props) {
-  
   // axios
   //   .get("http://localhost:5000/api/v1/maps")
   //   .then(function(response) {
@@ -21,7 +26,25 @@ function App(props) {
 
   return (
     <div className="App">
-      <PlayView />
+      <GameProvider>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/play">
+              <PlayPage />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
+            </Route>
+            <Route path="/signup">
+              <SignupPage />
+            </Route>
+          </Switch>
+        </Router>
+      </GameProvider>
     </div>
   );
 }

@@ -1,3 +1,6 @@
-.Button{
-    cursor: pointer;
+.Button {
+  cursor: pointer;
+  text-align: center;
+  border: black 2px solid;
+  border-radius: 4px;
 }

@@ -2,10 +2,11 @@
   width: 75%;
   right: 10%;
   height: 4rem;
-  border: black 4px solid;
-  position: absolute;
+  border: #540000 4px solid;
+  /* position: absolute; */
   border-top: 0;
   border-radius: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  background-color: white;
 }

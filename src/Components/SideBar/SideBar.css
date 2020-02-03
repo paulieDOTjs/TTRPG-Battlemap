@@ -1,11 +1,13 @@
 .SideBar {
-  width: 8rem;
+  width: 12rem;
   height: 100%;
-  border-right: black 4px solid;
+  border-right: #540000 4px solid;
   position: absolute;
+  background-color: white;
   left: 0;
 }
 
 .SideBarHeadline {
   font-size: 20px;
+  color: #540000;
 }
