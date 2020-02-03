@@ -7,17 +7,18 @@
 }
 
 .ObjectSelector:hover {
-  background-color: grey;
+  background-color: #909090;
   transition: 0.3s;
   color: white;
 }
 
 .Highlight:hover {
-  background-color: #FFB417;
+  background-color: #ffb417;
   color: #540000;
 }
+
 .Highlight {
   transition: 0.3s;
-  background-color: #FFB417;
+  background-color: #ffb417;
   color: #540000;
 }

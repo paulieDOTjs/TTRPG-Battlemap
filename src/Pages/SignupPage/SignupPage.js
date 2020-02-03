@@ -1,6 +1,5 @@
 import React from "react";
 import "./SignupPage.css";
-import Header from "../../Components/Header/Header";
 
 function SignupPage(props) {
   return (

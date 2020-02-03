@@ -1,6 +1,7 @@
 import React from "react";
 import "./SideBarEdit.css";
 import ObjectSelector from "../ObjectSelector/ObjectSelector";
+import ButtonEdit from "../ButtonEdit/ButtonEdit";
 
 function SideBarEdit(props) {
   return (
@@ -8,6 +9,11 @@ function SideBarEdit(props) {
       <div className="row">
         <div className="col">
           <h1 className="SideBarHeadline">EDIT VIEW</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <ButtonEdit />
         </div>
       </div>
       <div className="row">

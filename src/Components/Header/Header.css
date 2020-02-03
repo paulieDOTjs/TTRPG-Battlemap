@@ -1,12 +1,27 @@
 .Header {
-  width: 75%;
+  min-width: 75%;
   right: 10%;
-  height: 4rem;
+  min-height: 4rem;
   border: #540000 4px solid;
-  /* position: absolute; */
+  position: absolute;
   border-top: 0;
   border-radius: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background-color: white;
+}
+
+.AppTitle {
+  margin: 0;
+}
+
+.NavList {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.NavLink {
+  margin-left: 12px;
+  color: #540000;
 }

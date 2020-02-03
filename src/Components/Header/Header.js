@@ -6,21 +6,33 @@ import "./Header.css";
 function Header(props) {
   return (
     <div className="Header">
-      <h1>Battlemap</h1>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/play">Play</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/signup">Signup</Link>
-        </li>
-      </ul>
+      <div className="row">
+        <h1 className="col-6 AppTitle">Battlemap</h1>
+        <div className="col-6">
+          <ul className="NavList">
+            <li className="NavLink">
+              <Link style={{ color: "#540000" }} to="/">
+                Home
+              </Link>
+            </li>
+            <li className="NavLink">
+              <Link style={{ color: "#540000" }} to="/play">
+                Play
+              </Link>
+            </li>
+            <li className="NavLink">
+              <Link style={{ color: "#540000" }} to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="NavLink">
+              <Link style={{ color: "#540000" }} to="/signup">
+                Signup
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
