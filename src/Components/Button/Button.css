@@ -3,4 +3,12 @@
   text-align: center;
   border: black 2px solid;
   border-radius: 4px;
+  border: #540000 2px solid;
+  color: #540000;
+}
+
+.Button:hover {
+  background-color: #540000;
+  transition: 0.3s;
+  color: white;
 }

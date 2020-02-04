@@ -1,7 +1,8 @@
 import React from "react";
 import "./SideBarEdit.css";
 import ObjectSelector from "../ObjectSelector/ObjectSelector";
-import ButtonEdit from "../ButtonEdit/ButtonEdit";
+import Button from "../Button/Button";
+import * as Action from "../../State/Actions";
 
 function SideBarEdit(props) {
   return (
@@ -12,8 +13,18 @@ function SideBarEdit(props) {
         </div>
       </div>
       <div className="row">
-        <div className="col-12">
-          <ButtonEdit />
+        <div className="col-6">
+          <Button
+            data-action={Action.TOGGLE_EDIT_MODE}
+            style={{ minWidth: "100%" }}
+          >
+            Play Mode
+          </Button>
+        </div>
+        <div className="col-6">
+          <Button data-action={Action.CREATE_MAP} style={{ minWidth: "100%" }}>
+            Reset Map
+          </Button>
         </div>
       </div>
       <div className="row">

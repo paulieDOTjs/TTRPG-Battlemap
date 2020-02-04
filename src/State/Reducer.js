@@ -4,13 +4,22 @@ import {
   SET_OBJECT,
   TOGGLE_EDIT_MODE,
   SELECT_OBJECT,
-  SET_CHARACTER
+  SET_CHARACTER,
+  END_TURN
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
   // console.log(state);
   switch (action.type) {
+    case END_TURN:
+      let currentTurn = state.turn;
+      if (currentTurn === state.characters.length - 1) {
+        currentTurn = 0;
+      } else {
+        currentTurn++;
+      }
+      return { ...state, turn: currentTurn };
     case SET_CHARACTER:
       console.log("character jump");
       return { ...state };
@@ -39,7 +48,10 @@ export default function reducer(state, action) {
       const tileMap = state.tileMap;
 
       //Pulls in current position from state to do some math on
-      let newPosition = state.player1position;
+      const characters = state.characters;
+
+      let newPosition = characters[state.turn].position;
+
       if (
         action.payload === "KeyQ" ||
         action.payload === "KeyA" ||
@@ -111,7 +123,10 @@ export default function reducer(state, action) {
           keepInGrid(newPosition);
         }
       }
-      return { ...state, player1position: newPosition };
+
+      characters[state.turn].position = { ...newPosition };
+
+      return { ...state, characters: characters };
 
     case SELECT_OBJECT:
       return {

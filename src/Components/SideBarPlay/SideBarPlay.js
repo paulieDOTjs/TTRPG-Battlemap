@@ -1,6 +1,7 @@
 import React from "react";
 import "./SideBarPlay.css";
-import ButtonEdit from "../ButtonEdit/ButtonEdit";
+import Button from "../Button/Button";
+import * as Actions from "../../State/Actions";
 
 function SideBarPlay(props) {
   return (
@@ -11,8 +12,18 @@ function SideBarPlay(props) {
         </div>
       </div>
       <div className="row">
-        <div className="col-12">
-          <ButtonEdit />
+        <div className="col-6">
+          <Button
+            style={{ minWidth: "100%" }}
+            data-action={Actions.TOGGLE_EDIT_MODE}
+          >
+            Edit Mode
+          </Button>
+        </div>
+        <div className="col-6">
+          <Button style={{ minWidth: "100%" }} data-action={Actions.END_TURN}>
+            End Turn
+          </Button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
-import Player from "../Player/Player";
+import Character from "../Character/Character";
 import { GameContext } from "../../State/Context.js";
 
 const gridSize = 1;
@@ -12,7 +12,11 @@ function Grid() {
 
   //An array that will hold all the tiles to be placed on the grid
   const tiles = [];
+  const characters = [];
 
+  for (let i = 0; i < state.characters.length; i++) {
+    characters.push(<Character props={state.characters[i]} />);
+  }
   //For loop to create the tiles
   //It will run for as many times as rows times columns from state
   for (let i = 0; i < state.numberOfRows * state.numberOfCols; i++) {
@@ -54,11 +58,7 @@ function Grid() {
 
   return (
     <div className="Grid" style={styling}>
-      <Player
-        name="p1"
-        numberOfRows={state.numberOfRows}
-        numberOfCols={state.numberOfCols}
-      />
+      {characters}
       {tiles}
     </div>
   );

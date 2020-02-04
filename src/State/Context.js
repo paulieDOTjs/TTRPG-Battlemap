@@ -14,8 +14,40 @@ const initialState = {
   mapPosition: { left: 0, top: 0 },
   numberOfCols: 32,
   numberOfRows: 32,
-  player1position: { x: 1, y: 1 },
   selectedObject: 1,
+  turn: 1,
+  characters: [
+    {
+      name: "Tymothy",
+      movespeed: 30,
+      initiative: 20,
+      color: "red",
+      position: {
+        x: 1,
+        y: 4
+      }
+    },
+    {
+      name: "p2",
+      movespeed: 30,
+      initiative: 14,
+      color: "rebeccapurple",
+      position: {
+        x: 10,
+        y: 4
+      }
+    },
+    {
+      name: "p3",
+      movespeed: 30,
+      initiative: 18,
+      color: "salmon",
+      position: {
+        x: 11,
+        y: 4
+      }
+    }
+  ],
   tileMap: [
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
