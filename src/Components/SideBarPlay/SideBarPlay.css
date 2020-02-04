@@ -1,5 +1,12 @@
 .SideBarPlay {
   width: 100%;
   height: 100%;
- 
+  color: #ffb417;
+  border-right: #ffb417 4px solid;
+}
+
+.CharacterDisplaySection {
+  border-top: #ffb417 4px solid;
+  max-height: 80%;
+  overflow-y: scroll;
 }

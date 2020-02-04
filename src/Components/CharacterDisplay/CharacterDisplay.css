@@ -1,0 +1,11 @@
+.CharacterDisplay {
+  justify-content: center;
+  align-items: center;
+  border-bottom: #ffb417 4px solid;
+}
+
+.Highlight {
+  /* border: #540000 2px solid; */
+
+  background-color: #ffb417;
+}

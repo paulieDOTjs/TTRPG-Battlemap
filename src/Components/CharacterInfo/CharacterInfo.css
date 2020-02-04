@@ -1,0 +1,9 @@
+.CharacterInfo {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.CharacterListItem {
+  margin-bottom: 12px;
+}

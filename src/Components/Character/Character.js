@@ -9,7 +9,8 @@ function Character(props) {
       key="props.props.name"
       style={{
         gridColumnStart: props.props.position.x,
-        gridRowStart: props.props.position.y
+        gridRowStart: props.props.position.y,
+        backgroundColor: props.props.color
       }}
     >
       <p className="Name">{props.props.name}</p>

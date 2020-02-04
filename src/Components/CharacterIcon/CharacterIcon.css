@@ -1,0 +1,12 @@
+.CharacterIcon {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border: 2px black solid;
+}
+
+.PlayerInfo {
+  position: relative;
+  text-align: center;
+  top: 40px;
+}

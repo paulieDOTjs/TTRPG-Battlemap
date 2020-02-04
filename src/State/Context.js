@@ -10,7 +10,7 @@ export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: true,
+  editMode: false,
   mapPosition: { left: 0, top: 0 },
   numberOfCols: 32,
   numberOfRows: 32,
@@ -18,10 +18,10 @@ const initialState = {
   turn: 1,
   characters: [
     {
-      name: "Tymothy",
+      name: "Tymothy Breadstealer",
       movespeed: 30,
       initiative: 20,
-      color: "red",
+      color: "pink",
       position: {
         x: 1,
         y: 4
