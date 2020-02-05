@@ -77,7 +77,7 @@ export default function reducer(state, action) {
       }
 
       //Pulls in current position from state to do some math on
-      let newPosition = characters[state.turn].position;
+      let newPosition = { ...characters[state.turn].position };
 
       if (
         action.payload === "KeyQ" ||
@@ -151,12 +151,19 @@ export default function reducer(state, action) {
         }
       }
 
+      if (
+        newPosition.x !== characters[state.turn].position.x ||
+        newPosition.y !== characters[state.turn].position.y
+      ) {
+        movespeedRemaining = movespeedRemaining - 5;
+      }
+
       characters[state.turn].position = { ...newPosition };
 
       return {
         ...state,
         characters: characters,
-        movespeedRemaining: state.movespeedRemaining - 5
+        movespeedRemaining: movespeedRemaining
       };
     }
     case SET_CHARACTER: {

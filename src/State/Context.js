@@ -20,7 +20,7 @@ const initialState = {
   movespeedRemaining: 30,
   characters: [
     {
-      name: "Tymothy Breadstealer",
+      name: "Tymothy",
       movespeed: 30,
       initiative: 20,
       color: "pink",
