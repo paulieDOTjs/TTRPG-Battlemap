@@ -5,13 +5,15 @@ import {
   TOGGLE_EDIT_MODE,
   SELECT_OBJECT,
   SET_CHARACTER,
-  END_TURN
+  END_TURN,
+  SET_TURN
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
+  // console.log(state);
   switch (action.type) {
-    case END_TURN:
+    case END_TURN: {
       let currentTurn = state.turn;
       if (currentTurn === state.characters.length - 1) {
         currentTurn = 0;
@@ -24,7 +26,22 @@ export default function reducer(state, action) {
         movespeed: state.characters[currentTurn].movespeed,
         movespeedRemaining: state.characters[currentTurn].movespeed
       };
-    case MOVE_CHARACTER:
+    }
+    case SET_TURN: {
+      const currentTurn = state.turn;
+      const clickedTurn = parseInt(action.payload.dataset.position);
+      if (currentTurn === clickedTurn) {
+        return { ...state };
+      } else {
+        return {
+          ...state,
+          turn: clickedTurn,
+          movespeed: state.characters[currentTurn].movespeed,
+          movespeedRemaining: state.characters[currentTurn].movespeed
+        };
+      }
+    }
+    case MOVE_CHARACTER: {
       /********************************
        * This function keeps the player
        * inside the playable grid
@@ -53,6 +70,11 @@ export default function reducer(state, action) {
 
       //Pulls in The movement speed remaining of the current character
       let movespeedRemaining = state.movespeedRemaining;
+
+      //If the character has no remaining move speed they cannot move.
+      if (movespeedRemaining < 5) {
+        return { ...state };
+      }
 
       //Pulls in current position from state to do some math on
       let newPosition = characters[state.turn].position;
@@ -131,40 +153,40 @@ export default function reducer(state, action) {
 
       characters[state.turn].position = { ...newPosition };
 
-
-
       return {
         ...state,
         characters: characters,
         movespeedRemaining: state.movespeedRemaining - 5
       };
-    case SET_CHARACTER:
+    }
+    case SET_CHARACTER: {
       const clickedPosition = {
-        x: action.payload.target.dataset.col,
-        y: action.payload.target.dataset.row
+        x: action.payload.dataset.col,
+        y: action.payload.dataset.row
       };
       const charactersArray = state.characters;
       charactersArray[state.turn].position = { ...clickedPosition };
       return { ...state, characters: charactersArray };
-
-    case SELECT_OBJECT:
+    }
+    case SELECT_OBJECT: {
       return {
         ...state,
-        selectedObject: action.payload.target.dataset.tiletype
+        selectedObject: action.payload.dataset.tiletype
       };
+    }
 
     /*************************
      * This sets the currently
      * selected object to replace
      * something on the grid
      *************************/
-    case SET_OBJECT:
+    case SET_OBJECT: {
       //gets current tile map
       const newTileMap = [...state.tileMap];
       //gets the row number based on the tile clicked
-      const changingRow = action.payload.target.dataset.row - 1;
+      const changingRow = action.payload.dataset.row - 1;
       //gets the col number based on the tile clicked
-      const changingCol = action.payload.target.dataset.col - 1;
+      const changingCol = action.payload.dataset.col - 1;
       //A string of what the current row looks like from state
       const currentRow = state.tileMap[changingRow];
 
@@ -190,12 +212,13 @@ export default function reducer(state, action) {
         selectedObject: selectedObject
       };
 
-    //Changes the game between play or edit mode
-    case TOGGLE_EDIT_MODE:
+      //Changes the game between play or edit mode
+    }
+    case TOGGLE_EDIT_MODE: {
       return { ...state, editMode: !state.editMode };
-
+    }
     //Creates the map based on stae
-    case CREATE_MAP:
+    case CREATE_MAP: {
       //Temporary version of the tileMap
       const tileMapLocal = [];
       //Temporary version of what a row in the tile map looks like
@@ -218,7 +241,9 @@ export default function reducer(state, action) {
         ...state,
         tileMap: tileMapLocal
       };
-    default:
+    }
+    default: {
       throw new Error("UNKOWN ACTION:", action.type);
+    }
   }
 }

@@ -102,12 +102,25 @@ export default function GameProvider(props) {
   }, []);
 
   function handleClick(e) {
-    if (e.target.dataset.clickable) {
-      dispatch({
-        type: e.target.dataset.action,
-        payload: e
+    try {
+      e.path.map(x => {
+        if (x.dataset.clickable) {
+          dispatch({
+            type: x.dataset.action,
+            payload: x
+          });
+        }
       });
+    } catch {
+      return;
     }
+
+    // if (e.target.dataset.clickable) {
+    //   dispatch({
+    //     type: e.target.dataset.action,
+    //     payload: e
+    //   });
+    // }
   }
 
   useEffect(() => {

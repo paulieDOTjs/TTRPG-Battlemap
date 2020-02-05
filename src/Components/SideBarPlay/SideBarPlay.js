@@ -14,6 +14,7 @@ function SideBarPlay(props) {
         <CharacterDisplay
           className="Highlight CharacterDisplay row"
           props={state.characters[i]}
+          position={i}
         />
       );
     } else {
@@ -21,6 +22,7 @@ function SideBarPlay(props) {
         <CharacterDisplay
           className="CharacterDisplay row"
           props={state.characters[i]}
+          position={i}
         />
       );
     }
@@ -62,9 +64,7 @@ function SideBarPlay(props) {
       </div>
       <div className="CharacterDisplaySection">{characterDisplays}</div>
       <div className="row">
-        <div className="col-12">
-          {state.movespeedRemaining}
-        </div>
+        <div className="col-12">{state.movespeedRemaining}</div>
       </div>
     </div>
   );

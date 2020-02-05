@@ -5,6 +5,8 @@
   border-radius: 4px;
   border: #540000 2px solid;
   color: #540000;
+  font-size: 16px;
+  padding: 0;
 }
 
 .Button:hover {
