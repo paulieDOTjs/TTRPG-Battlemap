@@ -17,6 +17,7 @@ const initialState = {
   selectedObject: 1,
   turn: 0,
   movespeed: 0,
+  diagMove: false,
   movespeedRemaining: 30,
   characters: [
     {

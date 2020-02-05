@@ -24,7 +24,8 @@ export default function reducer(state, action) {
         ...state,
         turn: currentTurn,
         movespeed: state.characters[currentTurn].movespeed,
-        movespeedRemaining: state.characters[currentTurn].movespeed
+        movespeedRemaining: state.characters[currentTurn].movespeed,
+        diagMove: false
       };
     }
     case SET_TURN: {
@@ -37,7 +38,8 @@ export default function reducer(state, action) {
           ...state,
           turn: clickedTurn,
           movespeed: state.characters[currentTurn].movespeed,
-          movespeedRemaining: state.characters[currentTurn].movespeed
+          movespeedRemaining: state.characters[currentTurn].movespeed,
+          diagMove: false
         };
       }
     }
@@ -151,10 +153,31 @@ export default function reducer(state, action) {
         }
       }
 
+      /*******************************************************
+      If the the x or y position is different change the move
+      speed remaining to be -5. If the x AND y are different 
+      AND state.diagmove is true then set movement speed to be
+      -10 and state.diagmove to be false. If x AND y are 
+      different BUT state.diagmove is false movement speed
+      is -5. This makes it so every other time a diagonal
+      movement is made 5 or 10 movement is used.
+      *******************************************************/
       if (
         newPosition.x !== characters[state.turn].position.x ||
         newPosition.y !== characters[state.turn].position.y
       ) {
+        if (
+          newPosition.x !== characters[state.turn].position.x &&
+          newPosition.y !== characters[state.turn].position.y &&
+          state.diagMove
+        ) {
+          movespeedRemaining = movespeedRemaining - 10;
+          state.diagMove = false;
+        } else {
+          movespeedRemaining = movespeedRemaining - 5;
+          state.diagMove = true;
+        }
+      } else {
         movespeedRemaining = movespeedRemaining - 5;
       }
 
