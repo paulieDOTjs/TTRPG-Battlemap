@@ -15,7 +15,9 @@ const initialState = {
   numberOfCols: 32,
   numberOfRows: 32,
   selectedObject: 1,
-  turn: 1,
+  turn: 0,
+  movespeed: 0,
+  movespeedRemaining: 30,
   characters: [
     {
       name: "Tymothy Breadstealer",

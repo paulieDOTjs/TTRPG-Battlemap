@@ -10,7 +10,6 @@ import {
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
-  // console.log(state);
   switch (action.type) {
     case END_TURN:
       let currentTurn = state.turn;
@@ -19,10 +18,12 @@ export default function reducer(state, action) {
       } else {
         currentTurn++;
       }
-      return { ...state, turn: currentTurn };
-    case SET_CHARACTER:
-      console.log("character jump");
-      return { ...state };
+      return {
+        ...state,
+        turn: currentTurn,
+        movespeed: state.characters[currentTurn].movespeed,
+        movespeedRemaining: state.characters[currentTurn].movespeed
+      };
     case MOVE_CHARACTER:
       /********************************
        * This function keeps the player
@@ -47,9 +48,13 @@ export default function reducer(state, action) {
       //Pulls in the tile map from state
       const tileMap = state.tileMap;
 
-      //Pulls in current position from state to do some math on
+      //Pulls in the current position of all characters
       const characters = state.characters;
 
+      //Pulls in The movement speed remaining of the current character
+      let movespeedRemaining = state.movespeedRemaining;
+
+      //Pulls in current position from state to do some math on
       let newPosition = characters[state.turn].position;
 
       if (
@@ -126,7 +131,21 @@ export default function reducer(state, action) {
 
       characters[state.turn].position = { ...newPosition };
 
-      return { ...state, characters: characters };
+
+
+      return {
+        ...state,
+        characters: characters,
+        movespeedRemaining: state.movespeedRemaining - 5
+      };
+    case SET_CHARACTER:
+      const clickedPosition = {
+        x: action.payload.target.dataset.col,
+        y: action.payload.target.dataset.row
+      };
+      const charactersArray = state.characters;
+      charactersArray[state.turn].position = { ...clickedPosition };
+      return { ...state, characters: charactersArray };
 
     case SELECT_OBJECT:
       return {
