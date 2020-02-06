@@ -1,4 +1,9 @@
-.App{
-  display: flex;
-  justify-content: center;
+.App {
+  display: grid;
+}
+
+.MainSection {
+  position: static;
+  margin-top: 112px;
+  z-index: -3;
 }

@@ -1,0 +1,13 @@
+.CharacterQuestions {
+  border: 1px #540000 solid;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-overflow: clip;
+}
+
+.CharacterIconSetup {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+}

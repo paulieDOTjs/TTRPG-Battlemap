@@ -1,7 +1,8 @@
 .Header {
-  min-width: 75%;
-  right: 10%;
-  min-height: 4rem;
+  min-width: 60%;
+  top: 0;
+  right: 20%;
+  left: 20%;
   border: #540000 4px solid;
   position: absolute;
   border-top: 0;
@@ -9,6 +10,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background-color: white;
+  z-index: 5;
 }
 
 .AppTitle {

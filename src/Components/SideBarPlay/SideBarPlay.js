@@ -32,9 +32,7 @@ function SideBarPlay(props) {
     <div className="SideBarPlay container">
       <div className="row">
         <div className="col">
-          <h1 className="SideBarHeadline" style={{ color: "#FFB417" }}>
-            PLAY VIEW
-          </h1>
+          <h1 className="SideBarHeadline">PLAY VIEW</h1>
         </div>
       </div>
       <div className="row">
@@ -42,7 +40,7 @@ function SideBarPlay(props) {
           <Button
             style={{ minWidth: "100%" }}
             data-action={Actions.TOGGLE_EDIT_MODE}
-            className="Button LightMode"
+            className="Button"
           >
             Edit Mode
           </Button>
@@ -51,7 +49,7 @@ function SideBarPlay(props) {
           <Button
             style={{ minWidth: "100%" }}
             data-action={Actions.END_TURN}
-            className="Button LightMode"
+            className="Button"
           >
             End Turn
           </Button>

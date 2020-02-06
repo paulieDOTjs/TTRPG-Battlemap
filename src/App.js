@@ -8,6 +8,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import PlayPage from "./Pages/PlayPage/PlayPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
+import SetupPage from "./Pages/SetupPage/SetupPage";
 
 function App(props) {
   // axios
@@ -41,6 +42,9 @@ function App(props) {
             </Route>
             <Route path="/signup">
               <SignupPage />
+            </Route>
+            <Route path="/setup">
+              <SetupPage />
             </Route>
           </Switch>
         </Router>

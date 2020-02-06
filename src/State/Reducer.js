@@ -177,8 +177,6 @@ export default function reducer(state, action) {
           movespeedRemaining = movespeedRemaining - 5;
           state.diagMove = true;
         }
-      } else {
-        movespeedRemaining = movespeedRemaining - 5;
       }
 
       characters[state.turn].position = { ...newPosition };

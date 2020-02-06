@@ -21,33 +21,13 @@ const initialState = {
   movespeedRemaining: 30,
   characters: [
     {
-      name: "Tymothy",
+      name: "Default",
       movespeed: 30,
       initiative: 20,
       color: "pink",
       position: {
         x: 1,
-        y: 4
-      }
-    },
-    {
-      name: "p2",
-      movespeed: 30,
-      initiative: 14,
-      color: "rebeccapurple",
-      position: {
-        x: 10,
-        y: 4
-      }
-    },
-    {
-      name: "p3",
-      movespeed: 30,
-      initiative: 18,
-      color: "salmon",
-      position: {
-        x: 11,
-        y: 4
+        y: 1
       }
     }
   ],

@@ -1,9 +1,10 @@
 .SideBar {
-  width: 200px;
+  width: 20%;
   height: 100%;
   position: absolute;
   background-color: white;
   left: 0;
+  top: 0px;
 }
 
 .SideBarHeadline {
