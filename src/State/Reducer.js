@@ -165,6 +165,10 @@ export default function reducer(state, action) {
       };
     }
     case MOVE_CHARACTER: {
+      if (state.editMode) {
+        //If edit mode is on, characters cannot move
+        return { ...state };
+      }
       /********************************
        * This function keeps the player
        * inside the playable grid
@@ -293,6 +297,10 @@ export default function reducer(state, action) {
           state.diagMove
         ) {
           movespeedRemaining = movespeedRemaining - 10;
+          //If a diagonal move is attempted and it will take 10, but only 5 is remaining it will stop it.
+          if (movespeedRemaining === -5) {
+            return { ...state };
+          }
           state.diagMove = false;
         } else {
           movespeedRemaining = movespeedRemaining - 5;

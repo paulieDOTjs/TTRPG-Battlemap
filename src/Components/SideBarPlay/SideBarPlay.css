@@ -7,6 +7,16 @@
 
 .CharacterDisplaySection {
   border-top: #540000 4px solid;
-  max-height: 80%;
+  max-height: Calc(80% - 50px);
   overflow-y: scroll;
+}
+
+.MoveSpeedRemainingSection {
+  background-color: white;
+  border-top: #540000 4px solid;
+  height: 48px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }

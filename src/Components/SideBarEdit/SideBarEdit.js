@@ -44,7 +44,11 @@ function SideBarEdit(props) {
           </Button>
         </div>
       </div>
-      <h3 style={{ marginBottom: 0 }}>Edit Map Layout:</h3>
+      <div className="row">
+        <div className="col">
+          <h3 style={{ marginBottom: 0 }}>Edit Map Layout:</h3>
+        </div>
+      </div>
 
       <form className="SetupForm" onSubmit={handleSubmit}>
         <div className="row">
@@ -81,7 +85,11 @@ function SideBarEdit(props) {
         </div>
       </form>
 
-      <h3 style={{ marginBottom: 0 }}>Edit Map Objects:</h3>
+      <div className="row">
+        <div className="col">
+          <h3 style={{ marginBottom: 0 }}>Edit Map Objects:</h3>
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-6">
