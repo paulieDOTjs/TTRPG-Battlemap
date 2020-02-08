@@ -12,11 +12,16 @@
 }
 
 .MoveSpeedRemainingSection {
-  background-color: white;
+  background-color: #ffb417;
   border-top: #540000 4px solid;
   height: 48px;
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+.MoveSpeedRemainingParagraph {
+  color: #540000;
+  margin: 0;
 }

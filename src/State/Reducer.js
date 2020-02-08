@@ -9,7 +9,8 @@ import {
   SET_TURN,
   NO_ACTION,
   UPDATE_CHARACTER_INFO,
-  UPDATE_NUMBER_OF_CHARACTERS
+  DELETE_CHARACTER,
+  ADD_CHARACTER
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
@@ -22,8 +23,29 @@ export default function reducer(state, action) {
       return { ...state };
     }
 
-    case UPDATE_NUMBER_OF_CHARACTERS: {
-      return { ...state };
+    case ADD_CHARACTER: {
+      const defaultCharacterInfo = {
+        name: "Player",
+        movespeed: "30",
+        initiative: 0,
+        color: "Black",
+        position: {
+          x: 1,
+          y: 1
+        }
+      };
+      const characters = [...state.characters];
+      characters.push(defaultCharacterInfo);
+      return { ...state, characters: characters };
+    }
+
+    case DELETE_CHARACTER: {
+      const characters = state.characters;
+      console.log(action.payload.dataset.number);
+      characters.splice(action.payload.dataset.number, 1);
+      console.log(characters);
+      console.log(state.characters);
+      return { ...state, characters: characters };
     }
 
     case UPDATE_CHARACTER_INFO: {

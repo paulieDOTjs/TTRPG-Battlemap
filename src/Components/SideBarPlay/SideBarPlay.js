@@ -64,7 +64,7 @@ function SideBarPlay(props) {
       <div className="MoveSpeedRemainingSection">
         <div className="row">
           <div className="col-12">
-            Move speed remaining: {state.movespeedRemaining}
+            <p className="MoveSpeedRemainingParagraph">Move speed remaining: {state.movespeedRemaining}</p>
           </div>
         </div>
       </div>

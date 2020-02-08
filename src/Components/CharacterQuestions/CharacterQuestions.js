@@ -3,9 +3,9 @@ import "./CharacterQuestions.css";
 import * as Actions from "../../State/Actions";
 
 import { GameContext } from "../../State/Context.js";
+import Button from "../Button/Button";
 
 function CharacterQuestions(props) {
-  console.log(props.characterValues.position);
   const { dispatch } = useContext(GameContext);
   const [characterInfo, setCharacterInfo] = useState({
     name: props.characterValues.name,
@@ -32,7 +32,6 @@ function CharacterQuestions(props) {
           <input
             value={characterInfo.name}
             onChange={({ target }) => {
-              console.log(characterInfo);
               setCharacterInfo({ ...characterInfo, name: target.value });
             }}
           />
@@ -45,7 +44,6 @@ function CharacterQuestions(props) {
           <input
             value={characterInfo.initiative}
             onChange={({ target }) => {
-              console.log(characterInfo);
               setCharacterInfo({ ...characterInfo, initiative: target.value });
             }}
           />
@@ -58,7 +56,6 @@ function CharacterQuestions(props) {
           <input
             value={characterInfo.movespeed}
             onChange={({ target }) => {
-              console.log(characterInfo);
               setCharacterInfo({ ...characterInfo, movespeed: target.value });
             }}
           />
@@ -71,7 +68,6 @@ function CharacterQuestions(props) {
           <input
             value={characterInfo.color}
             onChange={({ target }) => {
-              console.log(characterInfo);
               setCharacterInfo({ ...characterInfo, color: target.value });
             }}
           />
@@ -84,6 +80,18 @@ function CharacterQuestions(props) {
             className="CharacterIconSetup"
             style={{ backgroundColor: characterInfo.color }}
           />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12">
+          <Button
+            style={{ width: "100%" }}
+            data-action={Actions.DELETE_CHARACTER}
+            data-number={props.number}
+          >
+            Delete Character
+          </Button>
         </div>
       </div>
     </div>

@@ -12,5 +12,6 @@
 }
 
 .Name {
-  font-size: 1rem;
+  font-size: 16px;
+  text-overflow: no-wrap;
 }

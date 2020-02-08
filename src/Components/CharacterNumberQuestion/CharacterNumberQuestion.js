@@ -1,74 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import "./CharacterNumberQuestion.css";
 import CharacterQuestions from "../CharacterQuestions/CharacterQuestions";
 import * as Actions from "../../State/Actions";
 
 import { GameContext } from "../../State/Context.js";
+import Button from "../Button/Button";
 
 function CharacterNumberQuestion(props) {
-  const { dispatch } = useContext(GameContext);
-  const [numberOfCharacters, setNumberOfCharacters] = useState(
-    props.props.length
-  );
-
-  const defaultCharacterInfo = {
-    name: "Player",
-    movespeed: "30",
-    initiative: 0,
-    color: "Red",
-    position: {
-      x: 1,
-      y: 1
-    }
-  };
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: Actions.UPDATE_NUMBER_OF_CHARACTERS,
-  //     payload: numberOfCharacters
-  //   });
-  // }, [numberOfCharacters]);
-
-  const characterQuestions = [];
-
-  try {
-    for (let i = 0; i < numberOfCharacters; i++) {
-      if (i > props.props.length - 1) {
-        console.log("hi");
-        characterQuestions.push(
-          <CharacterQuestions
-            key={i}
-            characterValues={defaultCharacterInfo}
-            number={i}
-          />
-        );
-      } else {
-        characterQuestions.push(
-          <CharacterQuestions
-            key={i}
-            characterValues={props.props[i]}
-            number={i}
-          />
-        );
-      }
-    }
-  } catch {
-    return;
-  }
+  const { state } = useContext(GameContext);
   return (
     <>
       <div className="row">
-        <div className="col-6">Number of characters:</div>
-        <div className="col-6">
-          <input
-            value={numberOfCharacters}
-            onChange={({ target }) => {
-              setNumberOfCharacters(target.value);
-            }}
-          />
+        <div className="col-12">
+          Number of characters:{" "}
+          <span className="MakeBox">{state.characters.length}</span>
         </div>
       </div>
-      {characterQuestions}
+      <Button
+        style={{ width: "100%", marginTop: "12px" }}
+        data-action={Actions.ADD_CHARACTER}
+      >
+        Add a character
+      </Button>
+      {state.characters.map((values, number) => {
+        return (
+          <CharacterQuestions
+            key={number}
+            characterValues={values}
+            number={number}
+          />
+        );
+      })}
     </>
   );
 }

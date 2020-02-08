@@ -20,7 +20,7 @@ const initialState = {
   movespeedRemaining: 30,
   characters: [
     {
-      name: "Player",
+      name: "Player 1",
       movespeed: "30",
       initiative: 20,
       color: "Red",
@@ -30,10 +30,20 @@ const initialState = {
       }
     },
     {
-      name: "Player",
+      name: "Player 2",
       movespeed: "30",
-      initiative: 0,
-      color: "Green",
+      initiative: 20,
+      color: "Red",
+      position: {
+        x: 1,
+        y: 1
+      }
+    },
+    {
+      name: "Player 3",
+      movespeed: "30",
+      initiative: 20,
+      color: "Red",
       position: {
         x: 1,
         y: 1
