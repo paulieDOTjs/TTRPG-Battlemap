@@ -7,15 +7,39 @@ import {
   SET_CHARACTER,
   END_TURN,
   SET_TURN,
-  NO_ACTION
+  NO_ACTION,
+  UPDATE_CHARACTER_INFO,
+  UPDATE_NUMBER_OF_CHARACTERS
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
   // console.log(state);
   switch (action.type) {
+    //Used for testing
     case NO_ACTION: {
+      console.log("No action received");
       return { ...state };
+    }
+
+    case UPDATE_NUMBER_OF_CHARACTERS: {
+      return { ...state };
+    }
+
+    case UPDATE_CHARACTER_INFO: {
+      const allCharacters = [...state.characters];
+      const character = {
+        ...state.characters[action.payload.number],
+        name: action.payload.name,
+        movespeed: action.payload.movespeed,
+        initiative: action.payload.initiative,
+        color: action.payload.color,
+        position: action.payload.position,
+        number: action.payload.number
+      };
+      allCharacters[action.payload.number] = character;
+
+      return { ...state, characters: allCharacters };
     }
     case END_TURN: {
       let currentTurn = state.turn;

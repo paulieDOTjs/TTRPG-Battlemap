@@ -1,16 +1,13 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
-// import CreateState from "./CreateState";
 import Reducer from "./Reducer";
 import * as Actions from "./Actions";
-
-// import UseKeyboard from "../Hooks/UseKeyboard";
 
 export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: false,
+  editMode: true,
   mapPosition: { left: 0, top: 0 },
   dimensions: {
     x: 32,
@@ -25,7 +22,7 @@ const initialState = {
     {
       name: "Player",
       movespeed: "30",
-      initiative: 0,
+      initiative: 20,
       color: "Red",
       position: {
         x: 1,

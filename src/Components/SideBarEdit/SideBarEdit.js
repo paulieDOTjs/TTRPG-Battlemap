@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import "./SideBarEdit.css";
 import ObjectSelector from "../ObjectSelector/ObjectSelector";
 import Button from "../Button/Button";
+import CharacterNumberQuestion from "../CharacterNumberQuestion/CharacterNumberQuestion";
 import * as Actions from "../../State/Actions";
 
 import { GameContext } from "../../State/Context.js";
@@ -106,6 +107,18 @@ function SideBarEdit(props) {
         </div>
         <div className="col-12">
           <ObjectSelector tiletype="0" />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <h3 style={{ marginBottom: 0 }}>Edit Characters:</h3>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <CharacterNumberQuestion props={state.characters} />
         </div>
       </div>
     </div>

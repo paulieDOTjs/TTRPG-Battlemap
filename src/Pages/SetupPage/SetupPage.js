@@ -1,6 +1,6 @@
 import React from "react";
 import "./SetupPage.css";
-import NumberOfCharacters from "../../Components/NumberOfCharacters/NumberOfCharacters";
+import CharacterNumberQuestion from "../../Components/CharacterNumberQuestion/CharacterNumberQuestion";
 
 function SetupPage(props) {
   return (
@@ -19,16 +19,16 @@ function SetupPage(props) {
                 <div className="col-6">Number of columns:</div>
                 <input style={{ maxWidth: "44%" }} className="col-6" />
               </div>
-              <NumberOfCharacters />
+              <CharacterNumberQuestion />
             </form>
           </div>
           <div className="SetupSections" style={{ gridColumnStart: 2 }}>
             <h1 className="SetupHeader">Saved Maps</h1>
-            <NumberOfCharacters />
+            <CharacterNumberQuestion />
           </div>
           <div className="SetupSections" style={{ gridColumnStart: 3 }}>
             <h1 className="SetupHeader">Public Maps</h1>
-            <NumberOfCharacters />
+            <CharacterNumberQuestion />
           </div>
         </div>
       </div>
