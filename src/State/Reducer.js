@@ -6,13 +6,17 @@ import {
   SELECT_OBJECT,
   SET_CHARACTER,
   END_TURN,
-  SET_TURN
+  SET_TURN,
+  NO_ACTION
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
   // console.log(state);
   switch (action.type) {
+    case NO_ACTION: {
+      return { ...state };
+    }
     case END_TURN: {
       let currentTurn = state.turn;
       if (currentTurn === state.characters.length - 1) {
@@ -42,6 +46,123 @@ export default function reducer(state, action) {
           diagMove: false
         };
       }
+    }
+    case SET_CHARACTER: {
+      const clickedPosition = {
+        x: action.payload.dataset.col,
+        y: action.payload.dataset.row
+      };
+      const charactersArray = state.characters;
+      charactersArray[state.turn].position = { ...clickedPosition };
+      return { ...state, characters: charactersArray };
+    }
+    case SELECT_OBJECT: {
+      return {
+        ...state,
+        selectedObject: action.payload.dataset.tiletype
+      };
+    }
+
+    /*************************
+     * This sets the currently
+     * selected object to replace
+     * something on the grid
+     *************************/
+    case SET_OBJECT: {
+      //gets current tile map
+      const newTileMap = [...state.tileMap];
+      //gets the row number based on the tile clicked
+      const changingRow = action.payload.dataset.row - 1;
+      //gets the col number based on the tile clicked
+      const changingCol = action.payload.dataset.col - 1;
+      //A string of what the current row looks like from state
+      const currentRow = state.tileMap[changingRow];
+
+      //The character that is currently at that place in the tilemap/
+      const currentObject = currentRow.charAt(changingCol);
+      //The character in state that is currently wanting to replace what is in the tilemap.
+      let selectedObject = state.selectedObject;
+      if (currentObject == selectedObject) {
+        selectedObject = tileMapDirectory[selectedObject].next;
+      }
+
+      //The new row with the changed string
+      const newRow =
+        currentRow.substring(0, changingCol) +
+        selectedObject +
+        currentRow.substring(changingCol + 1);
+
+      //The new tileMap updated with the new row
+      newTileMap[changingRow] = newRow;
+      return {
+        ...state,
+        tileMap: newTileMap,
+        selectedObject: selectedObject
+      };
+
+      //Changes the game between play or edit mode
+    }
+    case TOGGLE_EDIT_MODE: {
+      return { ...state, editMode: !state.editMode };
+    }
+    //Creates the map based on state
+    case CREATE_MAP: {
+      console.log(action.payload);
+
+      //Temporary version of the tileMap
+      let tileMapLocal = [...state.tileMap];
+
+      //Shortens tileMap to be the new inputted value
+      if (tileMapLocal[0].length > action.payload.x) {
+        tileMapLocal.map((key, value) => {
+          const x = key.slice(0, action.payload.x);
+          tileMapLocal[value] = x;
+        });
+      }
+
+      //Adds blank columns to the right of the current columns
+      if (tileMapLocal[0].length < action.payload.x) {
+        const newColumnNumber = action.payload.x - tileMapLocal[0].length;
+        let additionalColumns = "";
+        for (let i = 0; i < newColumnNumber; i++) {
+          additionalColumns = additionalColumns + 0;
+        }
+        tileMapLocal.map((key, value) => {
+          key = key + additionalColumns;
+          tileMapLocal[value] = key;
+        });
+      }
+
+      //Reduces the length of the array based the new incoming y
+      if (tileMapLocal.length > action.payload.y) {
+        tileMapLocal = tileMapLocal.slice(0, action.payload.y);
+      }
+
+      //Reduces the length of the array based the new incoming y
+      if (tileMapLocal.length < action.payload.y) {
+        let additionalColumns = "";
+
+        for (let i = 0; i < action.payload.x; i++) {
+          additionalColumns = additionalColumns + 0;
+        }
+
+        const rowDifference = action.payload.y - tileMapLocal.length;
+        for (let i = 0; i < rowDifference; i++) {
+          tileMapLocal.push(additionalColumns);
+        }
+      }
+
+      //Console logs to make sure it did it right, it will be the tile map and the length of the row
+      console.log(tileMapLocal);
+      console.log(tileMapLocal[0].length);
+      return {
+        ...state,
+        tileMap: tileMapLocal,
+        dimensions: {
+          x: action.payload.x,
+          y: action.payload.y
+        }
+      };
     }
     case MOVE_CHARACTER: {
       /********************************
@@ -185,89 +306,6 @@ export default function reducer(state, action) {
         ...state,
         characters: characters,
         movespeedRemaining: movespeedRemaining
-      };
-    }
-    case SET_CHARACTER: {
-      const clickedPosition = {
-        x: action.payload.dataset.col,
-        y: action.payload.dataset.row
-      };
-      const charactersArray = state.characters;
-      charactersArray[state.turn].position = { ...clickedPosition };
-      return { ...state, characters: charactersArray };
-    }
-    case SELECT_OBJECT: {
-      return {
-        ...state,
-        selectedObject: action.payload.dataset.tiletype
-      };
-    }
-
-    /*************************
-     * This sets the currently
-     * selected object to replace
-     * something on the grid
-     *************************/
-    case SET_OBJECT: {
-      //gets current tile map
-      const newTileMap = [...state.tileMap];
-      //gets the row number based on the tile clicked
-      const changingRow = action.payload.dataset.row - 1;
-      //gets the col number based on the tile clicked
-      const changingCol = action.payload.dataset.col - 1;
-      //A string of what the current row looks like from state
-      const currentRow = state.tileMap[changingRow];
-
-      //The character that is currently at that place in the tilemap/
-      const currentObject = currentRow.charAt(changingCol);
-      //The character in state that is currently wanting to replace what is in the tilemap.
-      let selectedObject = state.selectedObject;
-      if (currentObject == selectedObject) {
-        selectedObject = tileMapDirectory[selectedObject].next;
-      }
-
-      //The new row with the changed string
-      const newRow =
-        currentRow.substring(0, changingCol) +
-        selectedObject +
-        currentRow.substring(changingCol + 1);
-
-      //The new tileMap updated with the new row
-      newTileMap[changingRow] = newRow;
-      return {
-        ...state,
-        tileMap: newTileMap,
-        selectedObject: selectedObject
-      };
-
-      //Changes the game between play or edit mode
-    }
-    case TOGGLE_EDIT_MODE: {
-      return { ...state, editMode: !state.editMode };
-    }
-    //Creates the map based on stae
-    case CREATE_MAP: {
-      //Temporary version of the tileMap
-      const tileMapLocal = [];
-      //Temporary version of what a row in the tile map looks like
-      const tileMapRow = [];
-
-      //Based on the number of columns it pushes a "0" into the row
-      for (let i = 0; i < state.numberOfCols; i++) {
-        tileMapRow.push("0");
-      }
-
-      //Based on the number of rows it pushes a row of 0s into the map
-      for (let i = 0; i < state.numberOfRows; i++) {
-        tileMapLocal.push(tileMapRow.join(""));
-      }
-
-      //Console logs to make sure it did it right, it will be the tile map and the length of the row
-      console.log(tileMapLocal);
-      console.log(tileMapLocal[0].length);
-      return {
-        ...state,
-        tileMap: tileMapLocal
       };
     }
     default: {

@@ -7,24 +7,28 @@ function CharacterQuestions(props) {
     <div className="CharacterQuestions">
       <div className="row">
         <div className="col-6">Character {props.number + 1} name:</div>
-        <input style={{ maxWidth: "44%" }} className="col-6" />
+        <div className="col-6">
+          <input />
+        </div>
       </div>
 
       <div className="row">
         <div className="col-6">Move speed:</div>
-        <input style={{ maxWidth: "44%" }} className="col-6" />
+        <div className="col-6">
+          <input />
+        </div>
       </div>
 
       <div className="row">
         <div className="col-6">Icon color:</div>
-        <input
-          style={{ maxWidth: "44%" }}
-          className="col-5"
-          value={characterIconColor}
-          onChange={({ target }) => {
-            setCharacterIconColor(target.value);
-          }}
-        />
+        <div className="col-5">
+          <input
+            value={characterIconColor}
+            onChange={({ target }) => {
+              setCharacterIconColor(target.value);
+            }}
+          />
+        </div>
         <div className="col-1" style={{ marginLeft: 0 }}>
           <div
             className="CharacterIconSetup"

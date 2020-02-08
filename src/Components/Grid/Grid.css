@@ -1,5 +1,6 @@
 .Grid {
   top: 100px;
+  left: 500px;
   display: grid;
   position: absolute;
   border: #540000 4px solid;

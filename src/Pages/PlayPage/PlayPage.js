@@ -4,7 +4,7 @@ import PlayView from "../../Components/PlayView/PlayView";
 
 function PlayPage(props) {
   return (
-    <div className={PlayPage}>
+    <div className="PlayPage">
       <PlayView />
       {props.children}
     </div>

@@ -13,14 +13,14 @@ function NumberOfCharacters(props) {
     <>
       <div className="row">
         <div className="col-6">Number of players:</div>
-        <input
-          className="col-6"
-          style={{ maxWidth: "44%" }}
-          value={numberOfCharacters}
-          onChange={({ target }) => {
-            setNumberOfCharacters(target.value);
-          }}
-        />
+        <div className="col-6">
+          <input
+            value={numberOfCharacters}
+            onChange={({ target }) => {
+              setNumberOfCharacters(target.value);
+            }}
+          />
+        </div>
       </div>
       {characterQuestions}
     </>

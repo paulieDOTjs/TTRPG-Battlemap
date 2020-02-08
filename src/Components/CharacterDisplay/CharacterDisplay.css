@@ -1,7 +1,8 @@
 .CharacterDisplay {
+  padding-top: 8px;
   justify-content: center;
   align-items: center;
-  border-bottom: #ffb417 4px solid;
+  border-bottom: #540000 4px solid;
 }
 
 .Highlight {

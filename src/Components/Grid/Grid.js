@@ -15,16 +15,19 @@ function Grid() {
   const characters = [];
 
   for (let i = 0; i < state.characters.length; i++) {
-    characters.push(<Character props={state.characters[i]} />);
+    characters.push(
+      <Character key={"character" + i} props={state.characters[i]} />
+    );
   }
+
   //For loop to create the tiles
   //It will run for as many times as rows times columns from state
-  for (let i = 0; i < state.numberOfRows * state.numberOfCols; i++) {
+  for (let i = 0; i < state.dimensions.y * state.dimensions.x; i++) {
     //Does math to get the row number this tile is in
-    const rowNumber = Math.floor(i / state.numberOfCols) + 1;
+    const rowNumber = Math.floor(i / state.dimensions.x) + 1;
 
     //Does math to get the column number this tile is in
-    const colNumber = i + 1 - Math.floor((rowNumber - 1) * state.numberOfCols);
+    const colNumber = i + 1 - Math.floor((rowNumber - 1) * state.dimensions.x);
 
     //Gives an ID based on the row and column number
     const tileID = `Row + ${rowNumber} Col + ${colNumber}`;
@@ -51,9 +54,9 @@ function Grid() {
    * will also center it on the screen.
    ************************************************************/
   const styling = {
-    gridTemplateColumns: `repeat(${state.numberOfCols}, auto)`,
-    gridTemplateRows: `repeat(${state.numberOfRows}, auto)`,
-    left: `Calc(50% - ${state.numberOfCols * (gridSize / 2)}rem`
+    gridTemplateColumns: `repeat(${state.dimensions.x}, auto)`,
+    gridTemplateRows: `repeat(${state.dimensions.y}, auto)`,
+    left: `Calc(50% - ${state.dimensions.x * (gridSize / 2)}rem`
   };
 
   return (

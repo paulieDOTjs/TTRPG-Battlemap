@@ -57,7 +57,7 @@ function SideBarPlay(props) {
       </div>
       <div className="row">
         <div className="col-12">
-          <h3 style={{ margin: 0 }}>Characters</h3>
+          <h3 style={{ margin: 0 }}>Characters:</h3>
         </div>
       </div>
       <div className="CharacterDisplaySection">{characterDisplays}</div>

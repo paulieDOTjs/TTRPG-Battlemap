@@ -6,6 +6,10 @@ body {
   background-size: contain; */
 }
 
+input {
+  min-width: 1px;
+}
+
 h1,
 h2,
 h3,

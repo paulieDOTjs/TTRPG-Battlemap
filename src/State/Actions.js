@@ -6,5 +6,6 @@ export const SELECT_OBJECT = "SELECT_OBJECT";
 export const SET_OBJECT = "SET_OBJECT";
 export const END_TURN = "END_TURN";
 export const SET_TURN = "SET_TURN";
+export const NO_ACTION = "NO_ACTION";
 
 export const MOVE_BOARD = "MOVE_BOARD";
