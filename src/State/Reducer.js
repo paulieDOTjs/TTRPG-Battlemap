@@ -62,6 +62,18 @@ export default function reducer(state, action) {
       };
       allCharacters[action.payload.number] = character;
 
+      allCharacters.sort(function(a, b) {
+        var characterA = parseInt(a.initiative);
+        var characterB = parseInt(b.initiative);
+        if (characterA < characterB) {
+          return 1;
+        }
+        if (characterA > characterB) {
+          return -1;
+        }
+        return 0;
+      });
+
       return { ...state, characters: allCharacters };
     }
     case END_TURN: {
