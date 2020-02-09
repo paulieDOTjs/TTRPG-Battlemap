@@ -10,7 +10,8 @@ import {
   NO_ACTION,
   UPDATE_CHARACTER_INFO,
   DELETE_CHARACTER,
-  ADD_CHARACTER
+  ADD_CHARACTER,
+  TOGGLE_PRIVATE_MAP
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
@@ -150,6 +151,10 @@ export default function reducer(state, action) {
     }
     case TOGGLE_EDIT_MODE: {
       return { ...state, editMode: !state.editMode };
+    }
+    case TOGGLE_PRIVATE_MAP: {
+      console.log(state.private);
+      return { ...state, private: !state.private };
     }
     //Creates the map based on state
     case CREATE_MAP: {

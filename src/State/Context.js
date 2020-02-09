@@ -9,15 +9,14 @@ export const GameContext = createContext();
 const initialState = {
   editMode: true,
   mapPosition: { left: 0, top: 0 },
-  dimensions: {
-    x: 32,
-    y: 32
-  },
   selectedObject: 1,
   turn: 0,
   movespeed: 0,
   diagMove: false,
   movespeedRemaining: 30,
+  mapName: "",
+  private: false,
+  saved: false,
   characters: [
     {
       name: "Player 1",

@@ -10,19 +10,19 @@ import HomePage from "./Pages/HomePage/HomePage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
 
 function App(props) {
-  // axios
-  //   .get("http://localhost:5000/api/v1/maps")
-  //   .then(function(response) {
-  //     // handle success
-  //     console.log(response);
-  //   })
-  //   .catch(function(error) {
-  //     // handle error
-  //     console.log(error);
-  //   })
-  //   .then(function() {
-  //     // always executed
-  //   });
+  axios
+    .get("http://localhost:5000/api/v1/maps")
+    .then(function(response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function(error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function() {
+      // always executed
+    });
 
   return (
     <div className="App">

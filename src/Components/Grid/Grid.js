@@ -22,12 +22,13 @@ function Grid() {
 
   //For loop to create the tiles
   //It will run for as many times as rows times columns from state
-  for (let i = 0; i < state.dimensions.y * state.dimensions.x; i++) {
+  for (let i = 0; i < state.tileMap.length * state.tileMap[0].length; i++) {
     //Does math to get the row number this tile is in
-    const rowNumber = Math.floor(i / state.dimensions.x) + 1;
+    const rowNumber = Math.floor(i / state.tileMap[0].length) + 1;
 
     //Does math to get the column number this tile is in
-    const colNumber = i + 1 - Math.floor((rowNumber - 1) * state.dimensions.x);
+    const colNumber =
+      i + 1 - Math.floor((rowNumber - 1) * state.tileMap[0].length);
 
     //Gives an ID based on the row and column number
     const tileID = `Row + ${rowNumber} Col + ${colNumber}`;
@@ -54,9 +55,9 @@ function Grid() {
    * will also center it on the screen.
    ************************************************************/
   const styling = {
-    gridTemplateColumns: `repeat(${state.dimensions.x}, auto)`,
-    gridTemplateRows: `repeat(${state.dimensions.y}, auto)`,
-    left: `Calc(50% - ${state.dimensions.x * (gridSize / 2)}rem`
+    gridTemplateColumns: `repeat(${state.tileMap[0].length}, auto)`,
+    gridTemplateRows: `repeat(${state.tileMap.length}, auto)`,
+    left: `Calc(50% - ${state.tileMap[0].length * (gridSize / 2)}rem`
   };
 
   return (

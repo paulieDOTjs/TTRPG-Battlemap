@@ -9,11 +9,15 @@ import { GameContext } from "../../State/Context.js";
 
 function SideBarEdit(props) {
   const { state, dispatch } = useContext(GameContext);
-  const [dimensions, setDimensions] = useState(state.dimensions);
+  const [mapInfo, setMapInfo] = useState({
+    name: state.mapName,
+    x: state.tileMap[0].length,
+    y: state.tileMap.length
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
-    let newValues = dimensions;
+    let newValues = mapInfo;
     newValues.x = parseInt(newValues.x);
     newValues.y = parseInt(newValues.y);
 
@@ -41,10 +45,70 @@ function SideBarEdit(props) {
         </div>
         <div className="col-6">
           <Button data-action={Actions.NO_ACTION} style={{ minWidth: "100%" }}>
-            Fake Button
+            Save map
           </Button>
         </div>
       </div>
+      <div className="row">
+        <div className="col-6">
+          <Button data-action={Actions.NO_ACTION} style={{ minWidth: "100%" }}>
+            Load saved map
+          </Button>
+        </div>
+        <div className="col-6">
+          <Button data-action={Actions.NO_ACTION} style={{ minWidth: "100%" }}>
+            Load public map
+          </Button>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <h3 style={{ marginBottom: 0 }}>Edit Map Details:</h3>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-6">Map name: </div>
+        <div className="col-6">
+          <input
+            value={mapInfo.name}
+            onChange={({ target }) => {
+              setMapInfo({ ...mapInfo, name: target.value });
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-5">Private map:</div>
+        <div className="col-1">
+          <div
+            style={{ marginLeft: "-10px", cursor: "pointer" }}
+            className={
+              state.private
+                ? "FakeCheckbox checkBoxOn"
+                : "FakeCheckbox checkBoxOff"
+            }
+            data-clickable={true}
+            data-action={Actions.TOGGLE_PRIVATE_MAP}
+          ></div>
+        </div>
+        <div className="col-5">Saved:</div>
+        <div className="col-1">
+          <div
+            style={{ marginLeft: "-10px" }}
+            className={
+              state.saved
+                ? "FakeCheckbox checkBoxOn"
+                : "FakeCheckbox checkBoxOff"
+            }
+            data-clickable={true}
+            data-action={Actions.NO_ACTION}
+          ></div>
+        </div>
+      </div>
+
       <div className="row">
         <div className="col">
           <h3 style={{ marginBottom: 0 }}>Edit Map Layout:</h3>
@@ -56,9 +120,9 @@ function SideBarEdit(props) {
           <div className="col-6">Number of columns:</div>
           <div className="col-6">
             <input
-              value={dimensions.x}
+              value={mapInfo.x}
               onChange={({ target }) => {
-                setDimensions({ ...dimensions, x: target.value });
+                setMapInfo({ ...mapInfo, x: target.value });
               }}
             />
           </div>
@@ -67,9 +131,9 @@ function SideBarEdit(props) {
           <div className="col-6">Number of rows:</div>
           <div className="col-6">
             <input
-              value={dimensions.y}
+              value={mapInfo.y}
               onChange={({ target }) => {
-                setDimensions({ ...dimensions, y: target.value });
+                setMapInfo({ ...mapInfo, y: target.value });
               }}
             />
           </div>
