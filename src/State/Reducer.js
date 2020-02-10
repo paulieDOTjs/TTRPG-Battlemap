@@ -1,3 +1,5 @@
+import uuid from "uuid";
+
 import {
   MOVE_CHARACTER,
   CREATE_MAP,
@@ -27,6 +29,7 @@ export default function reducer(state, action) {
     case ADD_CHARACTER: {
       const defaultCharacterInfo = {
         name: "Player",
+        characterID: uuid(),
         movespeed: "30",
         initiative: 0,
         color: "Black",
@@ -37,49 +40,78 @@ export default function reducer(state, action) {
       };
       const characters = [...state.characters];
       characters.push(defaultCharacterInfo);
-      return { ...state, characters: characters };
+      return {
+        ...state,
+        characters: characters,
+        characterID: uuid()
+      };
     }
 
     case DELETE_CHARACTER: {
-      const characters = state.characters;
-      console.log(action.payload.dataset.number);
-      characters.splice(action.payload.dataset.number, 1);
-      console.log(characters);
-      console.log(state.characters);
+      console.log("hi");
+      const defaultCharacterInfo = {
+        name: "Player",
+        characterID: uuid(),
+        movespeed: "30",
+        initiative: 0,
+        color: "Black",
+        position: {
+          x: 1,
+          y: 1
+        }
+      };
+
+      if (state.characters.length === 1) {
+        return { ...state, characters: [defaultCharacterInfo] };
+      }
+      const characters = state.characters.filter(character => {
+        return character.characterID !== action.payload.characterID;
+      });
+
+      console.log("i;m from the reducer", characters);
+
       return { ...state, characters: characters };
     }
 
     case UPDATE_CHARACTER_INFO: {
-      const allCharacters = [...state.characters];
-      const character = {
-        ...state.characters[action.payload.number],
+      let allCharacters = [...state.characters];
+
+      let index;
+
+      const character = allCharacters.filter((singleCharacter, i) => {
+        index = i;
+        return singleCharacter.characterID === action.payload.characterID;
+      });
+
+      character[0] = {
         name: action.payload.name,
         movespeed: action.payload.movespeed,
         initiative: action.payload.initiative,
         color: action.payload.color,
-        position: action.payload.position,
-        number: action.payload.number
+        position: action.payload.position
       };
-      allCharacters[action.payload.number] = character;
 
-      allCharacters.sort(function(a, b) {
-        var characterA = parseInt(a.initiative);
-        var characterB = parseInt(b.initiative);
-        if (characterA < characterB) {
-          return 1;
-        }
-        if (characterA > characterB) {
-          return -1;
-        }
-        return 0;
-      });
+      allCharacters[index] = character[0];
+
+      // allCharacters.sort(function(a, b) {
+      //   var characterA = parseInt(a.initiative);
+      //   var characterB = parseInt(b.initiative);
+      //   if (characterA < characterB) {
+      //     return 1;
+      //   }
+      //   if (characterA > characterB) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // });
 
       return {
         ...state,
-        characters: allCharacters,
-        movespeedRemaining: allCharacters[state.turn].movespeed
+        characters: allCharacters
+        // movespeedRemaining: allCharacters[state.turn].movespeed
       };
     }
+
     case END_TURN: {
       let currentTurn = state.turn;
       if (currentTurn === state.characters.length - 1) {
@@ -95,6 +127,7 @@ export default function reducer(state, action) {
         diagMove: false
       };
     }
+
     case SET_TURN: {
       const currentTurn = state.turn;
       const clickedTurn = parseInt(action.payload.dataset.position);
@@ -110,6 +143,7 @@ export default function reducer(state, action) {
         };
       }
     }
+
     case SET_CHARACTER: {
       const clickedPosition = {
         x: action.payload.dataset.col,
@@ -119,6 +153,7 @@ export default function reducer(state, action) {
       charactersArray[state.turn].position = { ...clickedPosition };
       return { ...state, characters: charactersArray };
     }
+
     case SELECT_OBJECT: {
       return {
         ...state,
@@ -145,7 +180,7 @@ export default function reducer(state, action) {
       const currentObject = currentRow.charAt(changingCol);
       //The character in state that is currently wanting to replace what is in the tilemap.
       let selectedObject = state.selectedObject;
-      if (currentObject == selectedObject) {
+      if (parseInt(currentObject) === parseInt(selectedObject)) {
         selectedObject = tileMapDirectory[selectedObject].next;
       }
 
@@ -166,17 +201,16 @@ export default function reducer(state, action) {
 
       //Changes the game between play or edit mode
     }
+
     case TOGGLE_EDIT_MODE: {
       return { ...state, editMode: !state.editMode };
     }
+
     case TOGGLE_PRIVATE_MAP: {
-      console.log(state.private);
       return { ...state, private: !state.private, saved: false };
     }
     //Creates the map based on state
     case CREATE_MAP: {
-      console.log(action.payload);
-
       //Temporary version of the tileMap
       let tileMapLocal = [...state.tileMap];
 
@@ -233,6 +267,7 @@ export default function reducer(state, action) {
         saved: false
       };
     }
+
     case MOVE_CHARACTER: {
       if (state.editMode) {
         //If edit mode is on, characters cannot move

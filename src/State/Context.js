@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useEffect } from "react";
+import uuid from "uuid";
 
 import Reducer from "./Reducer";
 import * as Actions from "./Actions";
@@ -17,32 +18,14 @@ const initialState = {
   mapName: "",
   private: false,
   saved: false,
+  characterID: uuid(),
   characters: [
     {
-      name: "Player 1",
+      name: "Player",
+      characterID: 99,
       movespeed: "30",
-      initiative: 20,
-      color: "Red",
-      position: {
-        x: 1,
-        y: 1
-      }
-    },
-    {
-      name: "Player 2",
-      movespeed: "30",
-      initiative: 20,
-      color: "Red",
-      position: {
-        x: 1,
-        y: 1
-      }
-    },
-    {
-      name: "Player 3",
-      movespeed: "30",
-      initiative: 20,
-      color: "Red",
+      initiative: 0,
+      color: "Black",
       position: {
         x: 1,
         y: 1
@@ -89,25 +72,35 @@ export default function GameProvider(props) {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   function HandleKey(e) {
-    dispatch({
-      type: Actions.MOVE_CHARACTER,
-      payload: e.code
-    });
+    if (!state.editMode) {
+      if (e.code === "Enter") {
+        dispatch({
+          type: Actions.END_TURN,
+          payload: e.code
+        });
+      }
+      dispatch({
+        type: Actions.MOVE_CHARACTER,
+        payload: e.code
+      });
+    }
   }
 
   useEffect(() => {
     window.addEventListener("keydown", HandleKey);
     return () => window.removeEventListener("keydown", HandleKey);
-  }, []);
+  }, [state.editMode]);
 
   function handleClick(e) {
     try {
       e.path.map(x => {
         if (x.dataset.clickable) {
-          dispatch({
-            type: x.dataset.action,
-            payload: x
-          });
+          if (x.dataset.action) {
+            dispatch({
+              type: x.dataset.action,
+              payload: x
+            });
+          }
         }
       });
     } catch {
