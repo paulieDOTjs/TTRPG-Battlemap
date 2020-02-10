@@ -74,7 +74,11 @@ export default function reducer(state, action) {
         return 0;
       });
 
-      return { ...state, characters: allCharacters };
+      return {
+        ...state,
+        characters: allCharacters,
+        movespeedRemaining: allCharacters[state.turn].movespeed
+      };
     }
     case END_TURN: {
       let currentTurn = state.turn;
@@ -100,8 +104,8 @@ export default function reducer(state, action) {
         return {
           ...state,
           turn: clickedTurn,
-          movespeed: state.characters[currentTurn].movespeed,
-          movespeedRemaining: state.characters[currentTurn].movespeed,
+          movespeed: state.characters[clickedTurn].movespeed,
+          movespeedRemaining: state.characters[clickedTurn].movespeed,
           diagMove: false
         };
       }
@@ -156,7 +160,8 @@ export default function reducer(state, action) {
       return {
         ...state,
         tileMap: newTileMap,
-        selectedObject: selectedObject
+        selectedObject: selectedObject,
+        saved: false
       };
 
       //Changes the game between play or edit mode
@@ -166,7 +171,7 @@ export default function reducer(state, action) {
     }
     case TOGGLE_PRIVATE_MAP: {
       console.log(state.private);
-      return { ...state, private: !state.private };
+      return { ...state, private: !state.private, saved: false };
     }
     //Creates the map based on state
     case CREATE_MAP: {
@@ -224,7 +229,8 @@ export default function reducer(state, action) {
         dimensions: {
           x: action.payload.x,
           y: action.payload.y
-        }
+        },
+        saved: false
       };
     }
     case MOVE_CHARACTER: {

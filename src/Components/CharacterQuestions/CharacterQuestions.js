@@ -68,7 +68,8 @@ function CharacterQuestions(props) {
           <input
             value={characterInfo.color}
             onChange={({ target }) => {
-              setCharacterInfo({ ...characterInfo, color: target.value });
+              const string = target.value.replace(/\s/g, "");
+              setCharacterInfo({ ...characterInfo, color: string });
             }}
           />
         </div>
