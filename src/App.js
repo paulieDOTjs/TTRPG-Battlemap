@@ -1,27 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import axios from "axios";
+import superagent from "superagent";
 import Header from "./Components/Header/Header";
+import SideBar from "./Components/SideBar/SideBar";
 import GameProvider from "./State/Context";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import PlayPage from "./Pages/PlayPage/PlayPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
+import MapFinder from "./Components/MapFinder/MapFinder";
 
 function App(props) {
-  axios
-    .get("http://localhost:5000/api/v1/maps")
+  superagent
+    .get("http://localhost:5000/ping")
     .then(function(response) {
       // handle success
-      console.log(response);
+      console.log("ok", response.text);
     })
     .catch(function(error) {
       // handle error
-      console.log(error);
-    })
-    .then(function() {
-      // always executed
+      console.log("error", error);
     });
 
   return (
@@ -34,6 +33,8 @@ function App(props) {
               <HomePage />
             </Route>
             <Route path="/play">
+              <SideBar />
+              {}
               <PlayPage />
             </Route>
             <Route path="/login">
@@ -41,6 +42,9 @@ function App(props) {
             </Route>
             <Route path="/signup">
               <SignupPage />
+            </Route>
+            <Route path="/test">
+              <MapFinder />
             </Route>
           </Switch>
         </Router>

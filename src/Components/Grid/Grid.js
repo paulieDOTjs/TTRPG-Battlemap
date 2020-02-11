@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
 import Character from "../Character/Character";
@@ -57,16 +57,23 @@ function Grid() {
   const styling = {
     gridTemplateColumns: `repeat(${state.tileMap[0].length}, auto)`,
     gridTemplateRows: `repeat(${state.tileMap.length}, auto)`,
-    left: `Calc(50% - ${state.tileMap[0].length * (gridSize / 2)}rem`
+    height: `Calc(${state.tileMap.length}rem + ${state.tileMap.length}px + ${state.tileMap.length}px )`,
+    width: `Calc(${state.tileMap[0].length}rem + ${state.tileMap[0].length}px + ${state.tileMap[0].length}px )`
   };
-  return useMemo(() => {
-    return (
+  return (
+    <div
+      className="Gap"
+      style={{
+        height: styling.height + "50px",
+        width: styling.width + "150px"
+      }}
+    >
       <div className="Grid" style={styling}>
         {characters}
         {tiles}
       </div>
-    );
-  }, [state.characters, state.tileMap]);
+    </div>
+  );
 }
 
 export default Grid;

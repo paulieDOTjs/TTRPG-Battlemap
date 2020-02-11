@@ -8,8 +8,8 @@ export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: true,
-  mapPosition: { left: 0, top: 0 },
+  editMode: false,
+  selectMode: false,
   selectedObject: 1,
   turn: 0,
   movespeed: 0,
@@ -18,11 +18,13 @@ const initialState = {
   mapName: "",
   private: false,
   saved: false,
+  createdBy: "God",
+  editedBy: "God",
   characterID: uuid(),
   characters: [
     {
       name: "Player",
-      characterID: 99,
+      characterID: uuid(),
       movespeed: "30",
       initiative: 0,
       color: "Black",

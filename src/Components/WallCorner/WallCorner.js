@@ -1,7 +1,7 @@
 import React from "react";
-import "./WallX.css";
+import "./WallCorner.css";
 
-function WallX(props) {
+function WallCorner(props) {
   /**************************
    * Takes in wallClass prop
    * applies it to className
@@ -9,12 +9,11 @@ function WallX(props) {
    * element of "wall"
    **************************/
   return (
-    <div className="WallX">
-      <div className="WallXMain" />
-      <div className="WallXSecondary" />
-      <div className="WallXTertiary" />
+    <div className="WallCorner">
+      <div className={props.wallClass + "Secondary"} />
+      <div className={props.wallClass + "Main"} />
     </div>
   );
 }
 
-export default WallX;
+export default WallCorner;

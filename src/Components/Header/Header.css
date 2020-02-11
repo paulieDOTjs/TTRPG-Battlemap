@@ -1,10 +1,8 @@
 .Header {
-  min-width: 60%;
-  top: 0;
-  right: 20%;
-  left: 20%;
+  grid-row: 1;
+  grid-column-start: 2;
+  grid-column-end: 2;
   border: #540000 4px solid;
-  position: absolute;
   border-top: 0;
   border-radius: 20px;
   border-top-left-radius: 0;

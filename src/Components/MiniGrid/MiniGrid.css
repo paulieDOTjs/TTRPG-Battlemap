@@ -1,11 +1,5 @@
-.Gap {
-  min-height: 100%;
-  min-width: 100%;
-  margin: 150px;
-  margin-left: 50px;
-}
-
-.Grid {
+.MiniGrid {
+  margin: auto;
   margin-right: 50px;
   display: grid;
   border: #540000 4px solid;

@@ -1,7 +1,6 @@
 .SideBar {
-  width: 20%;
-  height: 100%;
-  position: absolute;
+  grid-row-start: 1;
+  grid-row-end: 3;
   background-color: white;
   left: 0;
   top: 0px;

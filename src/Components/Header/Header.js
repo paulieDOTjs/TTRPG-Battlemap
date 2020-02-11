@@ -30,6 +30,11 @@ function Header(props) {
                 Signup
               </Link>
             </li>
+            <li className="NavLink">
+              <Link style={{ color: "#540000" }} to="/test">
+                test
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

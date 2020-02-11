@@ -2,20 +2,25 @@
   z-index: -1;
 }
 
-.WallXV {
-  position: absolute;
-  margin-top: 0.225rem;
-  width: 1rem;
-  height: 0.5rem;
+.WallXMain {
+  width: 50%;
+  height: 25%;
+  margin-left: 25%;
   background-color: black;
   border: 0;
 }
 
-.WallXH {
-  position: absolute;
-  margin-left: 0.225rem;
-  height: 1rem;
-  width: 0.5rem;
+.WallXSecondary {
+  height: 50%;
+  width: 100%;
   background-color: black;
+  border: 0;
+}
+
+.WallXTertiary {
+  width: 50%;
+  height: 25%;
+  background-color: black;
+  margin-left: 25%;
   border: 0;
 }

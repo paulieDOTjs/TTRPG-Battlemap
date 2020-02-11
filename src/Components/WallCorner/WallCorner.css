@@ -1,0 +1,60 @@
+.WallCorner {
+  height: 100%;
+  width: 100%;
+}
+
+.trCornerWallMain {
+  height: 50%;
+  width: 77.5%;
+  background-color: black;
+  margin-left: 25%;
+}
+
+.trCornerWallSecondary {
+  height: 25%;
+  width: 50%;
+  background-color: black;
+  margin-left: 25%;
+}
+
+.rdCornerWallMain {
+  height: 25%;
+  width: 50%;
+  background-color: black;
+  margin-left: 25%;
+}
+
+.rdCornerWallSecondary {
+  height: 50%;
+  width: 77.5%;
+  background-color: black;
+  margin-left: 25%;
+  margin-top: 25%;
+}
+
+.dlCornerWallMain {
+  height: 25%;
+  width: 50%;
+  background-color: black;
+  margin-left: 25%;
+}
+
+.dlCornerWallSecondary {
+  height: 50%;
+  width: 75%;
+  background-color: black;
+  margin-top: 25%;
+}
+
+.ltCornerWallMain {
+  height: 50%;
+  width: 75%;
+  background-color: black;
+}
+
+.ltCornerWallSecondary {
+  height: 25%;
+  width: 50%;
+  background-color: black;
+  margin-left: 25%;
+}

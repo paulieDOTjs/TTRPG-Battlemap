@@ -1,4 +1,5 @@
 import uuid from "uuid";
+import superagent from "superagent";
 
 import {
   MOVE_CHARACTER,
@@ -13,12 +14,15 @@ import {
   UPDATE_CHARACTER_INFO,
   DELETE_CHARACTER,
   ADD_CHARACTER,
-  TOGGLE_PRIVATE_MAP
+  TOGGLE_PRIVATE_MAP,
+  SAVE_MAP,
+  USE_SELECTED_MAP,
+  UPDATE_MAP_NAME
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
-  // console.log(state);
+  console.log(action.type);
   switch (action.type) {
     //Used for testing
     case NO_ACTION: {
@@ -26,7 +30,45 @@ export default function reducer(state, action) {
       return { ...state };
     }
 
+    case USE_SELECTED_MAP: {
+      return { ...state, selectMode: true };
+    }
+
+    case UPDATE_MAP_NAME: {
+      return { ...state, mapName: action.payload };
+    }
+
+    case SAVE_MAP: {
+      console.log(state.mapName);
+      console.log("save MAP");
+      const saveData = {
+        name: state.mapName,
+        tileMap: state.tileMap,
+        creator: "God",
+        editedBy: "God",
+        private: state.private
+      };
+
+      superagent
+        .post("http://localhost:5000/api/v1/maps")
+        .send(saveData) // sends a JSON post body
+        .end((err, res) => {
+          console.log(err);
+          console.log(res);
+        });
+
+      return { ...state, saved: true };
+    }
+
+    case USE_SELECTED_MAP: {
+      console.log("use selected map");
+
+      return { ...state, saved: true };
+    }
+
     case ADD_CHARACTER: {
+      console.log(action.payload);
+      console.log(state.characters);
       const defaultCharacterInfo = {
         name: "Player",
         characterID: uuid(),
@@ -42,13 +84,11 @@ export default function reducer(state, action) {
       characters.push(defaultCharacterInfo);
       return {
         ...state,
-        characters: characters,
-        characterID: uuid()
+        characters: characters
       };
     }
 
     case DELETE_CHARACTER: {
-      console.log("hi");
       const defaultCharacterInfo = {
         name: "Player",
         characterID: uuid(),
@@ -68,47 +108,13 @@ export default function reducer(state, action) {
         return character.characterID !== action.payload.characterID;
       });
 
-      console.log("i;m from the reducer", characters);
-
       return { ...state, characters: characters };
     }
 
     case UPDATE_CHARACTER_INFO: {
-      let allCharacters = [...state.characters];
-
-      let index;
-
-      const character = allCharacters.filter((singleCharacter, i) => {
-        index = i;
-        return singleCharacter.characterID === action.payload.characterID;
-      });
-
-      character[0] = {
-        name: action.payload.name,
-        movespeed: action.payload.movespeed,
-        initiative: action.payload.initiative,
-        color: action.payload.color,
-        position: action.payload.position
-      };
-
-      allCharacters[index] = character[0];
-
-      // allCharacters.sort(function(a, b) {
-      //   var characterA = parseInt(a.initiative);
-      //   var characterB = parseInt(b.initiative);
-      //   if (characterA < characterB) {
-      //     return 1;
-      //   }
-      //   if (characterA > characterB) {
-      //     return -1;
-      //   }
-      //   return 0;
-      // });
-
       return {
         ...state,
-        characters: allCharacters
-        // movespeedRemaining: allCharacters[state.turn].movespeed
+        characters: action.payload
       };
     }
 
@@ -180,7 +186,7 @@ export default function reducer(state, action) {
       const currentObject = currentRow.charAt(changingCol);
       //The character in state that is currently wanting to replace what is in the tilemap.
       let selectedObject = state.selectedObject;
-      if (parseInt(currentObject) === parseInt(selectedObject)) {
+      if (currentObject == selectedObject) {
         selectedObject = tileMapDirectory[selectedObject].next;
       }
 
@@ -198,12 +204,29 @@ export default function reducer(state, action) {
         selectedObject: selectedObject,
         saved: false
       };
-
-      //Changes the game between play or edit mode
     }
 
+    //Changes the game between play or edit mode
     case TOGGLE_EDIT_MODE: {
-      return { ...state, editMode: !state.editMode };
+      const allCharacters = [...state.characters];
+      allCharacters.sort(function(a, b) {
+        var characterA = parseInt(a.initiative);
+        var characterB = parseInt(b.initiative);
+        if (characterA < characterB) {
+          return 1;
+        }
+        if (characterA > characterB) {
+          return -1;
+        }
+        return 0;
+      });
+
+      return {
+        ...state,
+        editMode: !state.editMode,
+        characters: allCharacters,
+        movespeedRemaining: allCharacters[state.turn].movespeed
+      };
     }
 
     case TOGGLE_PRIVATE_MAP: {

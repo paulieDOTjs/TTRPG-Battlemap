@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./PlayPage.css";
-import PlayView from "../../Components/PlayView/PlayView";
+import Grid from "../../Components/Grid/Grid";
+
+import { GameContext } from "../../State/Context.js";
 
 function PlayPage(props) {
+  const { state } = useContext(GameContext);
+
   return (
-    <div className="PlayPage">
-      <PlayView />
-      {props.children}
-    </div>
+    <div className="PlayPage">{state.selectMode ? "find a map" : <Grid />}</div>
   );
 }
 

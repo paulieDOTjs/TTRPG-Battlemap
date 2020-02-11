@@ -10,7 +10,6 @@ import { GameContext } from "../../State/Context.js";
 function SideBarEdit(props) {
   const { state, dispatch } = useContext(GameContext);
   const [mapInfo, setMapInfo] = useState({
-    name: state.mapName,
     x: state.tileMap[0].length,
     y: state.tileMap.length
   });
@@ -47,10 +46,7 @@ function SideBarEdit(props) {
             </Button>
           </div>
           <div className="col-6">
-            <Button
-              data-action={Actions.NO_ACTION}
-              style={{ minWidth: "100%" }}
-            >
+            <Button data-action={Actions.SAVE_MAP} style={{ minWidth: "100%" }}>
               Save map
             </Button>
           </div>
@@ -58,18 +54,18 @@ function SideBarEdit(props) {
         <div className="row">
           <div className="col-6">
             <Button
-              data-action={Actions.NO_ACTION}
+              data-action={Actions.USE_SELECTED_MAP}
               style={{ minWidth: "100%" }}
             >
-              Load saved map
+              View saved maps
             </Button>
           </div>
           <div className="col-6">
             <Button
-              data-action={Actions.NO_ACTION}
+              data-action={Actions.USE_SELECTED_MAP}
               style={{ minWidth: "100%" }}
             >
-              Load public map
+              View public maps
             </Button>
           </div>
         </div>
@@ -84,9 +80,12 @@ function SideBarEdit(props) {
           <div className="col-6">Map name: </div>
           <div className="col-6">
             <input
-              value={mapInfo.name}
+              value={state.mapName}
               onChange={({ target }) => {
-                setMapInfo({ ...mapInfo, name: target.value });
+                dispatch({
+                  type: Actions.UPDATE_MAP_NAME,
+                  payload: target.value
+                });
               }}
             />
           </div>
@@ -198,7 +197,14 @@ function SideBarEdit(props) {
         </div>
       </div>
     );
-  }, [state.editMode, state.saved, state.private, mapInfo, state.characters]);
+  }, [
+    state.editMode,
+    state.saved,
+    state.private,
+    mapInfo,
+    state.characters,
+    state.mapName
+  ]);
 }
 
 export default SideBarEdit;

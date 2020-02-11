@@ -10,8 +10,9 @@ function WallT(props) {
    **************************/
   return (
     <div className="WallT">
-      <div className={props.wallClass + "Secondary"} />
       <div className={props.wallClass + "Main"} />
+      <div className={props.wallClass + "Secondary"} />
+      <div className={props.wallClass + "Tertiary"} />
     </div>
   );
 }
