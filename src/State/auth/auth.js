@@ -18,12 +18,13 @@ export const logoutUser = setUser => {
 
 export const loginUser = (setUser, setErrors) => userData => {
   axios
-    .post("/api/users/login", userData)
+    .post(process.env.REACT_APP_SERVER_URL + "/api/v1/users/login", userData)
     .then(res => {
+      alert("Success");
       // Save to localStorage
-
       // Set token to localStorage
-      const { token } = res.data;
+      const token = res.data.token;
+      // localStorage.setItem('jwtToken', "tom");
       localStorage.setItem("jwtToken", token);
       // Set token to Auth header
       setAuthToken(token);
@@ -33,14 +34,16 @@ export const loginUser = (setUser, setErrors) => userData => {
       setUser(decoded);
     })
     .catch(err => {
+      alert("An error occured, please try again");
       console.log(err);
       setErrors(err.response.data);
     });
 };
 
 export const registerUser = setErrors => (userData, history) => {
+  console.log(history);
   axios
-    .post("/api/users/register", userData)
+    .post(process.env.REACT_APP_SERVER_URL + "/api/v1/users/register", userData)
     .then(res => history.push("/login"))
     .catch(err => {
       console.log(err);
@@ -67,7 +70,7 @@ export function useAuth() {
         logoutUser(setUser);
 
         // Redirect to login
-        window.location.href = "./login";
+        window.location.href = process.env.REACT_APP_SERVER_URL + "/login";
       }
     }
   }, []);

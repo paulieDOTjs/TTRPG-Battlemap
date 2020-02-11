@@ -1,4 +1,5 @@
 export const CREATE_MAP = "CREATE_MAP";
+export const UPDATE_USER = "UPDATE_USER";
 
 export const ADD_CHARACTER = "ADD_CHARACTER";
 export const UPDATE_CHARACTER_INFO = "UPDATE_CHARACTER_INFO";

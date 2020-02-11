@@ -17,7 +17,8 @@ import {
   TOGGLE_PRIVATE_MAP,
   SAVE_MAP,
   USE_SELECTED_MAP,
-  UPDATE_MAP_NAME
+  UPDATE_MAP_NAME,
+  UPDATE_USER
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
@@ -30,9 +31,18 @@ export default function reducer(state, action) {
       return { ...state };
     }
 
+    case UPDATE_USER: {
+      return { ...state, username: action.payload };
+    }
+
     case USE_SELECTED_MAP: {
       console.log(action.payload);
-      return { ...state };
+      return {
+        ...state,
+        tileMap: action.payload.tileMap,
+        mapName: action.payload.name,
+        createdBy: action.payload.creator
+      };
     }
 
     case UPDATE_MAP_NAME: {
@@ -40,29 +50,23 @@ export default function reducer(state, action) {
     }
 
     case SAVE_MAP: {
-      console.log(state.mapName);
-      console.log("save MAP");
+      console.log(state);
       const saveData = {
         name: state.mapName,
         tileMap: state.tileMap,
-        creator: "God",
-        editedBy: "God",
+        savedBy: state.username,
+        creator: state.username,
+        editedBy: state.username,
         private: state.private
       };
 
       superagent
-        .post("http://localhost:5000/api/v1/maps")
+        .post(process.env.REACT_APP_SERVER_URL + "/api/v1/maps")
         .send(saveData) // sends a JSON post body
         .end((err, res) => {
           console.log(err);
           console.log(res);
         });
-
-      return { ...state, saved: true };
-    }
-
-    case USE_SELECTED_MAP: {
-      console.log("use selected map");
 
       return { ...state, saved: true };
     }

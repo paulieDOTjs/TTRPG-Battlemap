@@ -4,10 +4,11 @@
   border: #540000 4px solid;
   border-radius: 8px;
   padding: 2rem;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .MiniGrid:hover {
   background-color: #ffb417;
   transition: 0.3s;
-  cursor: pointer;
 }

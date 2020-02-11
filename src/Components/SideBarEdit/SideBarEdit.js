@@ -9,6 +9,7 @@ import { GameContext } from "../../State/Context.js";
 
 function SideBarEdit(props) {
   const { state, dispatch } = useContext(GameContext);
+
   const [mapInfo, setMapInfo] = useState({
     x: state.tileMap[0].length,
     y: state.tileMap.length
@@ -48,24 +49,6 @@ function SideBarEdit(props) {
           <div className="col-6">
             <Button data-action={Actions.SAVE_MAP} style={{ minWidth: "100%" }}>
               Save map
-            </Button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <Button
-              data-action={Actions.USE_SELECTED_MAP}
-              style={{ minWidth: "100%" }}
-            >
-              View saved maps
-            </Button>
-          </div>
-          <div className="col-6">
-            <Button
-              data-action={Actions.USE_SELECTED_MAP}
-              style={{ minWidth: "100%" }}
-            >
-              View public maps
             </Button>
           </div>
         </div>

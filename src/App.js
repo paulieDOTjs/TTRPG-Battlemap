@@ -6,16 +6,27 @@ import Header from "./Components/Header/Header";
 import SideBar from "./Components/SideBar/SideBar";
 import GameProvider from "./State/Context";
 import LoginPage from "./Pages/LoginPage/LoginPage";
+import LogoutPage from "./Pages/LogoutPage/LogoutPage";
 import PlayPage from "./Pages/PlayPage/PlayPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
-import MapFinder from "./Components/MapFinder/MapFinder";
+import PublicMapPage from "./Pages/PublicMapPage/PublicMapPage";
+import UserMapPage from "./Pages/UserMapPage/UserMapPage";
 
 import { Auth } from "./State/auth/auth";
 
+function MainMainPage() {
+  return (
+    <>
+      <SideBar />
+      <PlayPage />
+    </>
+  );
+}
+
 function App(props) {
   superagent
-    .get("http://localhost:5000/ping")
+    .get(process.env.REACT_APP_SERVER_URL + "/ping")
     .then(function(response) {
       // handle success
       console.log("ok", response.text);
@@ -32,22 +43,13 @@ function App(props) {
           <Router>
             <Header />
             <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route path="/play">
-                <SideBar />
-                <PlayPage />
-              </Route>
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <Route path="/signup">
-                <SignupPage />
-              </Route>
-              <Route path="/test">
-                <MapFinder />
-              </Route>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/play" component={MainMainPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
+              <Route path="/logout" component={LogoutPage} />
+              <Route path="/public" component={PublicMapPage} />
+              <Route path="/userMaps" component={UserMapPage} />
             </Switch>
           </Router>
         </GameProvider>

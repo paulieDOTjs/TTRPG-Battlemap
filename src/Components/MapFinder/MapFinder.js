@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./MapFinder.css";
 import superagent from "superagent";
-import SideBar from "../SideBar/SideBar";
 import MiniGrid from "../MiniGrid/MiniGrid";
 
 function MapFinder(props) {
@@ -9,7 +8,7 @@ function MapFinder(props) {
 
   useEffect(() => {
     superagent
-      .get("http://localhost:5000/api/v1/maps/public")
+      .get(process.env.REACT_APP_SERVER_URL + "/api/v1/maps/" + props.type)
       .then(function(response) {
         // handle success
         setMapsFound(response.body.MapData);
@@ -18,24 +17,25 @@ function MapFinder(props) {
         // handle error
         console.log("error", error);
       });
-  }, [mapsFound]);
+  }, []);
 
   return (
     <>
-      <SideBar />
-
       <div className="MapFinder">
         {mapsFound.length < 1
           ? "...loading"
-          : mapsFound.map(individualMapDta => {
+          : mapsFound.map(individualMapData => {
               return (
                 <>
                   <h2 style={{ textAlign: "center" }}>
-                    {individualMapDta.name}
+                    {individualMapData.name}
                   </h2>
-                  <MiniGrid props={individualMapDta} />
+                  <MiniGrid
+                    key={individualMapData._ID}
+                    props={individualMapData}
+                  />
                   <h3 style={{ textAlign: "center" }}>
-                    Created by: {individualMapDta.creator}
+                    Created by: {individualMapData.creator}
                   </h3>
                 </>
               );

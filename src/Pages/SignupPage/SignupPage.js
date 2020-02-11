@@ -1,18 +1,97 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../../State/auth/auth";
+
 import "./SignupPage.css";
 
-function SignupPage(props) {
+function SignupPage({ history }) {
+  const { user, registerUser, errors = {} } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  useEffect(() => {
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (user) {
+      history.push("/login");
+    }
+  }, [user, history]);
+
   return (
     <div className="SignupPage">
-      <h1>Sign Up</h1>
-      <h2>Email:</h2>
-      <input></input>
-      <h2>Username:</h2>
-      <input></input>
-      <h2>Password:</h2>
-      <input></input>
-      <h2>Confirm Password:</h2>
-      <input></input>
+      {user ? (
+        <div>You are already signed in </div>
+      ) : (
+        <form
+          noValidate
+          onSubmit={e => {
+            e.preventDefault();
+
+            const newUser = {
+              name,
+              email,
+              password,
+              password2
+            };
+
+            registerUser(newUser, history);
+          }}
+        >
+          <h1>Sign Up</h1>
+          <h2>
+            <label htmlFor="email">Email</label>
+          </h2>
+          <input
+            placeholder="type here"
+            onChange={event => setEmail(event.target.value)}
+            value={email}
+            error={errors.email}
+            id="email"
+            type="email"
+          />
+          <span>{errors.email}</span>
+          <h2>
+            <label htmlFor="name">Username</label>:
+          </h2>
+          <input
+            placeholder="type here"
+            onChange={event => setName(event.target.value)}
+            value={name}
+            error={errors.name}
+            id="name"
+            type="text"
+          />
+          <span>{errors.name}</span>
+
+          <h2>
+            <label htmlFor="password">Password:</label>
+          </h2>
+
+          <input
+            placeholder="type here"
+            onChange={event => setPassword(event.target.value)}
+            value={password}
+            error={errors.password}
+            id="password"
+            type="password"
+          />
+          <span>{errors.password}</span>
+          <h2>
+            <label htmlFor="password2">Confirm Password:</label>
+          </h2>
+
+          <input
+            placeholder="type here"
+            onChange={event => setPassword2(event.target.value)}
+            value={password2}
+            error={errors.password2}
+            id="password2"
+            type="password"
+          />
+          <span>{errors.password2}</span>
+          <button type="submit">Sign up</button>
+        </form>
+      )}
     </div>
   );
 }

@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./MiniGrid.css";
 import MiniTile from "../MiniTile/MiniTile";
 import * as Actions from "../../State/Actions";
+import { GameContext } from "../../State/Context.js";
 
 function MiniGrid(props) {
+  const { dispatch } = useContext(GameContext);
+
+  function handleClick() {
+    dispatch({
+      type: Actions.USE_SELECTED_MAP,
+      payload: props.props
+    });
+  }
+
   //An array that will hold all the tiles to be placed on the grid
   const tiles = [];
 
@@ -42,8 +52,6 @@ function MiniGrid(props) {
         data-col={colNumber}
         id={tileID}
         key={tileID}
-        data-clickable={true}
-        data-action={Actions.USE_SELECTED_MAP}
         //Sets the placement for where the tile will be on the grid
         style={{
           gridColumn: `${colNumber}`,
@@ -67,7 +75,7 @@ function MiniGrid(props) {
 
   return (
     <>
-      <div className="MiniGrid" style={styling}>
+      <div onClick={handleClick} className="MiniGrid" style={styling}>
         {tiles}
       </div>
     </>

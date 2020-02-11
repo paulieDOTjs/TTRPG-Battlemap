@@ -74,7 +74,7 @@ function Grid() {
         </div>
       </div>
     );
-  }, [state.tileMap.length, state.tileMap[0].length]);
+  }, [state.tileMap, state.characters.length]);
 }
 
 export default Grid;
