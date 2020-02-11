@@ -1,5 +1,7 @@
 .Header {
   grid-row: 1;
+  display: flex;
+  align-items: center;
   grid-column-start: 2;
   grid-column-end: 2;
   border: #540000 4px solid;
@@ -12,7 +14,8 @@
 }
 
 .AppTitle {
-  margin: 0;
+  align-self: center;
+  margin-top: auto;
 }
 
 .NavList {

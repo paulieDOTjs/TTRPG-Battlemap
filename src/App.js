@@ -11,6 +11,8 @@ import HomePage from "./Pages/HomePage/HomePage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
 import MapFinder from "./Components/MapFinder/MapFinder";
 
+import { Auth } from "./State/auth/auth";
+
 function App(props) {
   superagent
     .get("http://localhost:5000/ping")
@@ -25,30 +27,31 @@ function App(props) {
 
   return (
     <div className="App">
-      <GameProvider>
-        <Router>
-          <Header />
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route path="/play">
-              <SideBar />
-              {}
-              <PlayPage />
-            </Route>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
-            <Route path="/signup">
-              <SignupPage />
-            </Route>
-            <Route path="/test">
-              <MapFinder />
-            </Route>
-          </Switch>
-        </Router>
-      </GameProvider>
+      <Auth>
+        <GameProvider>
+          <Router>
+            <Header />
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/play">
+                <SideBar />
+                <PlayPage />
+              </Route>
+              <Route path="/login">
+                <LoginPage />
+              </Route>
+              <Route path="/signup">
+                <SignupPage />
+              </Route>
+              <Route path="/test">
+                <MapFinder />
+              </Route>
+            </Switch>
+          </Router>
+        </GameProvider>
+      </Auth>
     </div>
   );
 }

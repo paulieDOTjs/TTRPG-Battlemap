@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useMemo, useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
 import WallCorner from "../WallCorner/WallCorner";
@@ -38,58 +38,74 @@ function Tile(props) {
    *************************************************/
   const tileMapThisRowAndCol = tileMapThisRow.charAt(thisTileCol - 1);
 
-  return (
-    <div
-      className="Tile"
-      tiletype={tileMapThisRowAndCol}
-      data-clickable={true}
-      data-action={state.editMode ? Actions.SET_OBJECT : Actions.SET_CHARACTER}
-      data-passable={tileMapDirectory[tileMapThisRowAndCol].passable}
-      {...props}
-    >
-      {(tileMapThisRowAndCol === "1" && (
-        <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-      )) ||
-        (tileMapThisRowAndCol === "2" && (
+  return useMemo(() => {
+    return (
+      <div
+        className="Tile"
+        tiletype={tileMapThisRowAndCol}
+        data-clickable={true}
+        data-action={
+          state.editMode ? Actions.SET_OBJECT : Actions.SET_CHARACTER
+        }
+        data-passable={tileMapDirectory[tileMapThisRowAndCol].passable}
+        {...props}
+      >
+        {(tileMapThisRowAndCol === "1" && (
           <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
         )) ||
-        (tileMapThisRowAndCol === "3" && (
-          <WallCorner
-            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
-          />
-        )) ||
-        (tileMapThisRowAndCol === "4" && (
-          <WallCorner
-            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
-          />
-        )) ||
-        (tileMapThisRowAndCol === "5" && (
-          <WallCorner
-            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
-          />
-        )) ||
-        (tileMapThisRowAndCol === "6" && (
-          <WallCorner
-            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
-          />
-        )) ||
-        (tileMapThisRowAndCol === "7" && (
-          <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        )) ||
-        (tileMapThisRowAndCol === "8" && (
-          <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        )) ||
-        (tileMapThisRowAndCol === "9" && (
-          <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        )) ||
-        (tileMapThisRowAndCol === "Q" && (
-          <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        )) ||
-        (tileMapThisRowAndCol === "W" && (
-          <WallX wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
-        ))}
-    </div>
-  );
+          (tileMapThisRowAndCol === "2" && (
+            <Wall
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "3" && (
+            <WallCorner
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "4" && (
+            <WallCorner
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "5" && (
+            <WallCorner
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "6" && (
+            <WallCorner
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "7" && (
+            <WallT
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "8" && (
+            <WallT
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "9" && (
+            <WallT
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "Q" && (
+            <WallT
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          )) ||
+          (tileMapThisRowAndCol === "W" && (
+            <WallX
+              wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+            />
+          ))}
+      </div>
+    );
+  }, [state.tileMap[thisTileRow], props, state.editMode, tileMapThisRowAndCol]);
 }
 
 export default Tile;

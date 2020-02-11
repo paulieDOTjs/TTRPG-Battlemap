@@ -226,7 +226,8 @@ export default function reducer(state, action) {
         ...state,
         editMode: !state.editMode,
         characters: allCharacters,
-        movespeedRemaining: allCharacters[state.turn].movespeed
+        movespeedRemaining: allCharacters[state.turn].movespeed,
+        diagMove: false
       };
     }
 
@@ -415,6 +416,8 @@ export default function reducer(state, action) {
       is -5. This makes it so every other time a diagonal
       movement is made 5 or 10 movement is used.
       *******************************************************/
+      const pseudoState = { ...state };
+
       if (
         newPosition.x !== characters[state.turn].position.x ||
         newPosition.y !== characters[state.turn].position.y
@@ -422,17 +425,23 @@ export default function reducer(state, action) {
         if (
           newPosition.x !== characters[state.turn].position.x &&
           newPosition.y !== characters[state.turn].position.y &&
-          state.diagMove
+          pseudoState.diagMove
         ) {
           movespeedRemaining = movespeedRemaining - 10;
           //If a diagonal move is attempted and it will take 10, but only 5 is remaining it will stop it.
           if (movespeedRemaining === -5) {
             return { ...state };
           }
-          state.diagMove = false;
+          pseudoState.diagMove = false;
+        } else if (
+          newPosition.x !== characters[state.turn].position.x &&
+          newPosition.y !== characters[state.turn].position.y &&
+          !pseudoState.diagMove
+        ) {
+          movespeedRemaining = movespeedRemaining - 5;
+          pseudoState.diagMove = true;
         } else {
           movespeedRemaining = movespeedRemaining - 5;
-          state.diagMove = true;
         }
       }
 
@@ -441,7 +450,8 @@ export default function reducer(state, action) {
       return {
         ...state,
         characters: characters,
-        movespeedRemaining: movespeedRemaining
+        movespeedRemaining: movespeedRemaining,
+        diagMove: pseudoState.diagMove
       };
     }
     default: {

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useMemo, useContext } from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
 import Character from "../Character/Character";
 import { GameContext } from "../../State/Context.js";
 
 function Grid() {
+  console.log("Grid rerender");
   //Gets state from context
   const { state } = useContext(GameContext);
 
@@ -58,20 +59,22 @@ function Grid() {
     height: `Calc(${state.tileMap.length}rem + ${state.tileMap.length}px + ${state.tileMap.length}px )`,
     width: `Calc(${state.tileMap[0].length}rem + ${state.tileMap[0].length}px + ${state.tileMap[0].length}px )`
   };
-  return (
-    <div
-      className="Gap"
-      style={{
-        height: styling.height + "50px",
-        width: styling.width + "150px"
-      }}
-    >
-      <div className="Grid" style={styling}>
-        {characters}
-        {tiles}
+  return useMemo(() => {
+    return (
+      <div
+        className="Gap"
+        style={{
+          height: styling.height + "50px",
+          width: styling.width + "150px"
+        }}
+      >
+        <div className="Grid" style={styling}>
+          {characters}
+          {tiles}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }, [state.tileMap.length, state.tileMap[0].length]);
 }
 
 export default Grid;
