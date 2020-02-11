@@ -31,7 +31,8 @@ export default function reducer(state, action) {
     }
 
     case USE_SELECTED_MAP: {
-      return { ...state, selectMode: true };
+      console.log(action.payload);
+      return { ...state };
     }
 
     case UPDATE_MAP_NAME: {

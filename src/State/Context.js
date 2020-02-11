@@ -8,7 +8,7 @@ export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: false,
+  editMode: true,
   selectMode: false,
   selectedObject: 1,
   turn: 0,

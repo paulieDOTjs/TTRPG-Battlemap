@@ -4,8 +4,6 @@ import Tile from "../Tile/Tile";
 import Character from "../Character/Character";
 import { GameContext } from "../../State/Context.js";
 
-const gridSize = 1;
-
 function Grid() {
   //Gets state from context
   const { state } = useContext(GameContext);

@@ -1,6 +1,7 @@
 import React from "react";
 import "./MiniGrid.css";
 import MiniTile from "../MiniTile/MiniTile";
+import * as Actions from "../../State/Actions";
 
 function MiniGrid(props) {
   //An array that will hold all the tiles to be placed on the grid
@@ -9,9 +10,10 @@ function MiniGrid(props) {
   let size;
 
   if (props.props.tileMap[0].length > props.props.tileMap.length) {
-    size = 500 / props.props.tileMap[0].length;
+    size =
+      500 / props.props.tileMap[0].length - props.props.tileMap[0].length * 2;
   } else {
-    size = 500 / props.props.tileMap.length;
+    size = 500 / props.props.tileMap.length - props.props.tileMap.length * 2;
   }
 
   //For loop to create the tiles
@@ -40,6 +42,8 @@ function MiniGrid(props) {
         data-col={colNumber}
         id={tileID}
         key={tileID}
+        data-clickable={true}
+        data-action={Actions.USE_SELECTED_MAP}
         //Sets the placement for where the tile will be on the grid
         style={{
           gridColumn: `${colNumber}`,

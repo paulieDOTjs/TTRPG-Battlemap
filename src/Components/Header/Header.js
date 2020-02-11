@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import "./Header.css";
 
@@ -28,11 +28,6 @@ function Header(props) {
             <li className="NavLink">
               <Link style={{ color: "#540000" }} to="/signup">
                 Signup
-              </Link>
-            </li>
-            <li className="NavLink">
-              <Link style={{ color: "#540000" }} to="/test">
-                test
               </Link>
             </li>
           </ul>

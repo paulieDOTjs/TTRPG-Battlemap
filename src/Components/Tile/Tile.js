@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Tile.css";
 import Wall from "../Wall/Wall";
+import WallCorner from "../WallCorner/WallCorner";
 import WallT from "../WallT/WallT";
 import WallX from "../WallX/WallX";
 import { tileMapDirectory } from "../../Utils/tileMapDirectory";
@@ -53,16 +54,24 @@ function Tile(props) {
           <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
         )) ||
         (tileMapThisRowAndCol === "3" && (
-          <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
+          <WallCorner
+            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+          />
         )) ||
         (tileMapThisRowAndCol === "4" && (
-          <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
+          <WallCorner
+            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+          />
         )) ||
         (tileMapThisRowAndCol === "5" && (
-          <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
+          <WallCorner
+            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+          />
         )) ||
         (tileMapThisRowAndCol === "6" && (
-          <Wall wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />
+          <WallCorner
+            wallClass={tileMapDirectory[tileMapThisRowAndCol].className}
+          />
         )) ||
         (tileMapThisRowAndCol === "7" && (
           <WallT wallClass={tileMapDirectory[tileMapThisRowAndCol].className} />

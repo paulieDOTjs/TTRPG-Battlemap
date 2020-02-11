@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./CharacterQuestions.css";
 import * as Actions from "../../State/Actions";
 
