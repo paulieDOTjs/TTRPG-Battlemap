@@ -2,6 +2,7 @@ import React, { useMemo, useContext } from "react";
 import "./Grid.css";
 import Tile from "../Tile/Tile";
 import Character from "../Character/Character";
+import Resizer from "../Resizer/Resizer";
 import { GameContext } from "../../State/Context.js";
 
 function Grid() {
@@ -41,6 +42,8 @@ function Grid() {
         key={tileID}
         //Sets the placement for where the tile will be on the grid
         style={{
+          height: state.tileSize + "rem",
+          width: state.tileSize + "rem",
           gridColumn: `${colNumber}`,
           gridRow: `${rowNumber}`
         }}
@@ -56,10 +59,10 @@ function Grid() {
   const styling = {
     gridTemplateColumns: `repeat(${state.tileMap[0].length}, auto)`,
     gridTemplateRows: `repeat(${state.tileMap.length}, auto)`,
-    height: `Calc(${state.tileMap.length * 3}rem + ${
+    height: `Calc(${state.tileMap.length * state.tileSize}rem + ${
       state.tileMap.length
     }px + ${state.tileMap.length}px )`,
-    width: `Calc(${state.tileMap[0].length * 3}rem + ${
+    width: `Calc(${state.tileMap[0].length * state.tileSize}rem + ${
       state.tileMap[0].length
     }px + ${state.tileMap[0].length}px )`
   };
@@ -76,9 +79,10 @@ function Grid() {
           {characters}
           {tiles}
         </div>
+        <Resizer />
       </div>
     );
-  }, [state.tileMap, state.characters]);
+  }, [state.tileMap, state.characters, state.tileSize]);
 }
 
 export default Grid;

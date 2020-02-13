@@ -105,7 +105,13 @@ function Tile(props) {
           ))}
       </div>
     );
-  }, [state.tileMap[thisTileRow], props, state.editMode, tileMapThisRowAndCol]);
+  }, [
+    state.tileMap[thisTileRow],
+    props,
+    state.editMode,
+    tileMapThisRowAndCol,
+    state.tileSize
+  ]);
 }
 
 export default Tile;

@@ -15,6 +15,7 @@ export const TOGGLE_PRIVATE_MAP = "TOGGLE_PRIVATE_MAP";
 
 export const SELECT_OBJECT = "SELECT_OBJECT";
 export const SET_OBJECT = "SET_OBJECT";
+export const UPDATE_MAP_SIZE = "UPDATE_MAP_SIZE";
 
 export const UPDATE_MAP_NAME = "UPDATE_MAP_NAME";
 export const SAVE_MAP = "SAVE_MAP";

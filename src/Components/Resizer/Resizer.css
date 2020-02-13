@@ -1,0 +1,11 @@
+.Resizer {
+  position: absolute;
+  background-color: white;
+  width: 100px;
+  text-align: center;
+  right: 10px;
+  bottom: 10px;
+  border: 2px #540000 solid;
+  border-radius: 4px;
+  padding: 4px;
+}
