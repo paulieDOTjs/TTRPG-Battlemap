@@ -24,14 +24,36 @@ const initialState = {
   characterID: uuid(),
   characters: [
     {
-      name: "Player",
+      name: "Elseth",
       characterID: uuid(),
       movespeed: "30",
-      initiative: 0,
+      initiative: 12,
       color: "Black",
       position: {
         x: 1,
         y: 1
+      }
+    },
+    {
+      name: "Gren",
+      characterID: uuid(),
+      movespeed: "35",
+      initiative: 15,
+      color: "Blue",
+      position: {
+        x: 4,
+        y: 7
+      }
+    },
+    {
+      name: "Tymithy",
+      characterID: uuid(),
+      movespeed: "30",
+      initiative: 15,
+      color: "rebeccapurple",
+      position: {
+        x: 9,
+        y: 4
       }
     }
   ],

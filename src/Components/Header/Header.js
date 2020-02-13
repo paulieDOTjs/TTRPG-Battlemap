@@ -40,12 +40,12 @@ function Header(props) {
             </li>
             <li className="NavLink">
               <Link style={{ color: "#540000" }} to="/public">
-                Public Maps
+                Public
               </Link>
             </li>
             <li className="NavLink">
               <Link style={{ color: "#540000" }} to="/userMaps">
-                Saved Maps
+                Saved
               </Link>
             </li>
             <li className="NavLink">
@@ -59,7 +59,11 @@ function Header(props) {
               </Link>
             </li>
             <li className="NavLink">
-              <Link onClick={logoutUser} style={{ color: "#540000" }}>
+              <Link
+                onClick={logoutUser}
+                to="/logout"
+                style={{ color: "#540000" }}
+              >
                 Logout
               </Link>
             </li>

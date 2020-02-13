@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import Button from "../../Components/Button/Button";
 import { AuthContext } from "../../State/auth/auth";
 
 import "./SignupPage.css";
@@ -38,58 +39,83 @@ function SignupPage({ history }) {
           }}
         >
           <h1>Sign Up</h1>
-          <h2>
-            <label htmlFor="email">Email</label>
-          </h2>
-          <input
-            placeholder="type here"
-            onChange={event => setEmail(event.target.value)}
-            value={email}
-            error={errors.email}
-            id="email"
-            type="email"
-          />
-          <span>{errors.email}</span>
-          <h2>
-            <label htmlFor="name">Username</label>:
-          </h2>
-          <input
-            placeholder="type here"
-            onChange={event => setName(event.target.value)}
-            value={name}
-            error={errors.name}
-            id="name"
-            type="text"
-          />
+          <div className="row">
+            <div className="col">
+              <h2>
+                <label htmlFor="email">Email</label>
+              </h2>
+              <input
+                style={{ width: "200px" }}
+                placeholder="type here"
+                onChange={event => setEmail(event.target.value)}
+                value={email}
+                error={errors.email}
+                id="email"
+                type="email"
+              />
+              <span>{errors.email}</span>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <h2>
+                <label htmlFor="name">Username</label>:
+              </h2>
+              <input
+                style={{ width: "200px" }}
+                placeholder="type here"
+                onChange={event => setName(event.target.value)}
+                value={name}
+                error={errors.name}
+                id="name"
+                type="text"
+              />
+            </div>
+          </div>
           <span>{errors.name}</span>
+          <div className="row">
+            <div className="col">
+              <h2>
+                <label htmlFor="password">Password:</label>
+              </h2>
 
-          <h2>
-            <label htmlFor="password">Password:</label>
-          </h2>
-
-          <input
-            placeholder="type here"
-            onChange={event => setPassword(event.target.value)}
-            value={password}
-            error={errors.password}
-            id="password"
-            type="password"
-          />
+              <input
+                style={{ width: "200px" }}
+                placeholder="type here"
+                onChange={event => setPassword(event.target.value)}
+                value={password}
+                error={errors.password}
+                id="password"
+                type="password"
+              />
+            </div>
+          </div>
           <span>{errors.password}</span>
-          <h2>
-            <label htmlFor="password2">Confirm Password:</label>
-          </h2>
+          <div className="row">
+            <div className="col">
+              <h2>
+                <label htmlFor="password2">Confirm Password:</label>
+              </h2>
 
-          <input
-            placeholder="type here"
-            onChange={event => setPassword2(event.target.value)}
-            value={password2}
-            error={errors.password2}
-            id="password2"
-            type="password"
-          />
+              <input
+                style={{ width: "200px" }}
+                placeholder="type here"
+                onChange={event => setPassword2(event.target.value)}
+                value={password2}
+                error={errors.password2}
+                id="password2"
+                type="password"
+              />
+            </div>
+          </div>
           <span>{errors.password2}</span>
-          <button type="submit">Sign up</button>
+          <div className="row">
+            <div className="col">
+              <Button style={{ width: "200px" }} type="submit">
+                Sign up
+              </Button>
+            </div>
+          </div>
         </form>
       )}
     </div>

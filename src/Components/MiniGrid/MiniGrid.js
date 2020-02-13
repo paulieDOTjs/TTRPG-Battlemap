@@ -19,13 +19,6 @@ function MiniGrid(props) {
 
   let size;
 
-  if (props.props.tileMap[0].length > props.props.tileMap.length) {
-    size =
-      500 / props.props.tileMap[0].length - props.props.tileMap[0].length * 2;
-  } else {
-    size = 500 / props.props.tileMap.length - props.props.tileMap.length * 2;
-  }
-
   //For loop to create the tiles
   //It will run for as many times as rows times columns from props.props
   for (
@@ -33,6 +26,8 @@ function MiniGrid(props) {
     i < props.props.tileMap.length * props.props.tileMap[0].length;
     i++
   ) {
+    size = 500 / props.props.tileMap[0].length - 2;
+
     //Does math to get the row number this tile is in
     const rowNumber = Math.floor(i / props.props.tileMap[0].length) + 1;
 
@@ -68,9 +63,7 @@ function MiniGrid(props) {
    ************************************************************/
   const styling = {
     gridTemplateColumns: `repeat(${props.props.tileMap[0].length}, auto)`,
-    gridTemplateRows: `repeat(${props.props.tileMap.length}, auto)`,
-    height: "500px",
-    width: "500px"
+    gridTemplateRows: `repeat(${props.props.tileMap.length}, auto)`
   };
 
   return (

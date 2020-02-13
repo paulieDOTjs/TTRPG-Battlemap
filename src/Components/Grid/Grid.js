@@ -56,8 +56,12 @@ function Grid() {
   const styling = {
     gridTemplateColumns: `repeat(${state.tileMap[0].length}, auto)`,
     gridTemplateRows: `repeat(${state.tileMap.length}, auto)`,
-    height: `Calc(${state.tileMap.length}rem + ${state.tileMap.length}px + ${state.tileMap.length}px )`,
-    width: `Calc(${state.tileMap[0].length}rem + ${state.tileMap[0].length}px + ${state.tileMap[0].length}px )`
+    height: `Calc(${state.tileMap.length * 3}rem + ${
+      state.tileMap.length
+    }px + ${state.tileMap.length}px )`,
+    width: `Calc(${state.tileMap[0].length * 3}rem + ${
+      state.tileMap[0].length
+    }px + ${state.tileMap[0].length}px )`
   };
   return useMemo(() => {
     return (
@@ -74,7 +78,7 @@ function Grid() {
         </div>
       </div>
     );
-  }, [state.tileMap, state.characters.length]);
+  }, [state.tileMap, state.characters]);
 }
 
 export default Grid;

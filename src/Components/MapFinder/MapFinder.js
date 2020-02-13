@@ -27,14 +27,20 @@ function MapFinder(props) {
           : mapsFound.map(individualMapData => {
               return (
                 <>
-                  <h2 style={{ textAlign: "center" }}>
+                  <h2
+                    key={individualMapData._ID + individualMapData.name}
+                    style={{ textAlign: "center" }}
+                  >
                     {individualMapData.name}
                   </h2>
                   <MiniGrid
                     key={individualMapData._ID}
                     props={individualMapData}
                   />
-                  <h3 style={{ textAlign: "center" }}>
+                  <h3
+                    style={{ textAlign: "center" }}
+                    key={individualMapData._ID + individualMapData.creator}
+                  >
                     Created by: {individualMapData.creator}
                   </h3>
                 </>
