@@ -110,7 +110,6 @@ function Tile(props) {
     props,
     state.editMode,
     tileMapThisRowAndCol,
-    state.tileSize
   ]);
 }
 

@@ -21,10 +21,9 @@ const initialState = {
   username: "",
   createdBy: "",
   editedBy: [],
-  characterID: uuid(),
   characters: [
     {
-      name: "Elseth",
+      name: "Elseth Maleficum",
       characterID: uuid(),
       movespeed: "30",
       initiative: 12,
@@ -35,10 +34,10 @@ const initialState = {
       }
     },
     {
-      name: "Gren",
+      name: "Mira Riverthorn",
       characterID: uuid(),
       movespeed: "35",
-      initiative: 15,
+      initiative: 19,
       color: "Blue",
       position: {
         x: 4,
@@ -46,10 +45,10 @@ const initialState = {
       }
     },
     {
-      name: "Tymithy",
+      name: "Tymithy Luckleaf",
       characterID: uuid(),
-      movespeed: "30",
-      initiative: 15,
+      movespeed: "25",
+      initiative: 23,
       color: "rebeccapurple",
       position: {
         x: 9,

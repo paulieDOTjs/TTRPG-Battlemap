@@ -17,6 +17,11 @@ function Header(props) {
         type: Actions.UPDATE_USER,
         payload: user.name
       });
+    } else {
+      dispatch({
+        type: Actions.UPDATE_USER,
+        payload: ""
+      });
     }
   }, [user]);
 

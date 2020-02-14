@@ -15,9 +15,10 @@ export const TOGGLE_PRIVATE_MAP = "TOGGLE_PRIVATE_MAP";
 
 export const SELECT_OBJECT = "SELECT_OBJECT";
 export const SET_OBJECT = "SET_OBJECT";
-export const UPDATE_MAP_SIZE = "UPDATE_MAP_SIZE";
 
+export const UPDATE_MAP_ZOOM = "UPDATE_MAP_ZOOM";
 export const UPDATE_MAP_NAME = "UPDATE_MAP_NAME";
+export const CLEAR_MAP = "CLEAR_MAP";
 export const SAVE_MAP = "SAVE_MAP";
 export const USE_SELECTED_MAP = "USE_SELECTED_MAP";
 

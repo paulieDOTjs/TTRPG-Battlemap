@@ -115,6 +115,9 @@ function SideBarEdit(props) {
               <input
                 value={mapInfo.x}
                 onChange={({ target }) => {
+                  if (target.value > 64) {
+                    setMapInfo({ ...mapInfo, x: 64 });
+                  }
                   setMapInfo({ ...mapInfo, x: target.value });
                 }}
               />
@@ -162,8 +165,13 @@ function SideBarEdit(props) {
           <div className="col-6">
             <ObjectSelector tiletype="W" />
           </div>
-          <div className="col-12">
+          <div className="col-6">
             <ObjectSelector tiletype="0" />
+          </div>
+          <div className="col-6">
+            <Button style={{ width: "100%" }} data-action={Actions.CLEAR_MAP}>
+              Clear Map
+            </Button>
           </div>
         </div>
 

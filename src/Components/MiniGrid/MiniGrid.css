@@ -8,8 +8,3 @@
   cursor: pointer;
   width: 500px;
 }
-
-.MiniGrid:hover {
-  background-color: #ffb417;
-  transition: 0.3s;
-}

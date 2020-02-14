@@ -1,10 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./MapFinder.css";
 import superagent from "superagent";
 import MiniGrid from "../MiniGrid/MiniGrid";
+import Button from "../Button/Button";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import * as Actions from "../../State/Actions";
+import { GameContext } from "../../State/Context.js";
 
 function MapFinder(props) {
+  const { state, dispatch } = useContext(GameContext);
+
   const [mapsFound, setMapsFound] = useState([]);
+
+  function handleDelete(id) {
+    superagent
+      .delete(process.env.REACT_APP_SERVER_URL + "/api/v1/maps/id/" + id)
+      .then(function(response) {
+        // handle success
+        console.log(response);
+        superagent
+          .get(process.env.REACT_APP_SERVER_URL + "/api/v1/maps/" + props.type)
+          .then(function(response) {
+            // handle success
+            setMapsFound(response.body.MapData);
+          })
+          .catch(function(error) {
+            // handle error
+            console.log("error", error);
+          });
+      })
+      .catch(function(error) {
+        // handle error
+        console.log("error", error);
+      });
+  }
+
+  function handleClick(data) {
+    dispatch({
+      type: Actions.USE_SELECTED_MAP,
+      payload: data
+    });
+  }
 
   useEffect(() => {
     superagent
@@ -26,24 +62,48 @@ function MapFinder(props) {
           ? "...loading"
           : mapsFound.map(individualMapData => {
               return (
-                <>
+                <div className="MapBox">
                   <h2
-                    key={individualMapData._ID + individualMapData.name}
+                    key={individualMapData._id + individualMapData.name}
                     style={{ textAlign: "center" }}
                   >
                     {individualMapData.name}
                   </h2>
+                  <div style={{ textAlign: "center", margin: "10px" }}>
+                    <Link style={{ color: "#540000" }} to="/play">
+                      <Button
+                        onClick={() => handleClick(individualMapData)}
+                        style={{ padding: "4px", width: "108" }}
+                      >
+                        Use This Map
+                      </Button>
+                    </Link>
+                    {individualMapData.savedBy === state.username ? (
+                      <Button
+                        style={{
+                          padding: "4px",
+                          width: "108px",
+                          marginLeft: "20px"
+                        }}
+                        onClick={() => handleDelete(individualMapData._id)}
+                      >
+                        Delete
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                   <MiniGrid
-                    key={individualMapData._ID}
+                    key={individualMapData._id}
                     props={individualMapData}
                   />
                   <h3
                     style={{ textAlign: "center" }}
-                    key={individualMapData._ID + individualMapData.creator}
+                    key={individualMapData._id + individualMapData.creator}
                   >
                     Created by: {individualMapData.creator}
                   </h3>
-                </>
+                </div>
               );
             })}
       </div>

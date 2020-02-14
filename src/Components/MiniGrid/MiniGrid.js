@@ -1,19 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./MiniGrid.css";
 import MiniTile from "../MiniTile/MiniTile";
-import * as Actions from "../../State/Actions";
-import { GameContext } from "../../State/Context.js";
 
 function MiniGrid(props) {
-  const { dispatch } = useContext(GameContext);
-
-  function handleClick() {
-    dispatch({
-      type: Actions.USE_SELECTED_MAP,
-      payload: props.props
-    });
-  }
-
   //An array that will hold all the tiles to be placed on the grid
   const tiles = [];
 
@@ -68,7 +57,7 @@ function MiniGrid(props) {
 
   return (
     <>
-      <div onClick={handleClick} className="MiniGrid" style={styling}>
+      <div className="MiniGrid" style={styling}>
         {tiles}
       </div>
     </>

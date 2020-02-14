@@ -19,11 +19,13 @@ import {
   USE_SELECTED_MAP,
   UPDATE_MAP_NAME,
   UPDATE_USER,
-  UPDATE_MAP_SIZE
+  CLEAR_MAP,
+  UPDATE_MAP_ZOOM
 } from "./Actions";
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
+  console.log(state);
   console.log(action.type);
   switch (action.type) {
     //Used for testing
@@ -36,18 +38,33 @@ export default function reducer(state, action) {
       return { ...state, username: action.payload };
     }
 
-    case UPDATE_MAP_SIZE: {
+    case CLEAR_MAP: {
+      const dimensions = {
+        x: state.tileMap[0].length
+      };
+      let row = "0";
+      row = row.repeat(dimensions.x);
+
+      const newTileMap = [...state.tileMap];
+
+      for (let i = 0; i < newTileMap.length; i++) {
+        newTileMap[i] = row;
+      }
+      return { ...state, tileMap: newTileMap };
+    }
+
+    case UPDATE_MAP_ZOOM: {
       let currentSize = state.tileSize;
       if (action.payload === "plus") {
-        currentSize += 0.2;
+        currentSize += 0.5;
       } else {
-        currentSize -= 0.2;
+        currentSize -= 0.5;
       }
       if (currentSize > 5) {
         currentSize = 5;
       }
-      if (currentSize < 0.8) {
-        currentSize = 0.8;
+      if (currentSize < 0.5) {
+        currentSize = 0.5;
       }
       return { ...state, tileSize: currentSize };
     }
@@ -72,7 +89,7 @@ export default function reducer(state, action) {
         name: state.mapName,
         tileMap: state.tileMap,
         savedBy: state.username,
-        creator: state.username,
+        creator: state.createdBy === null ? state.createdBy : state.username,
         editedBy: state.username,
         private: state.private
       };
@@ -306,10 +323,6 @@ export default function reducer(state, action) {
       return {
         ...state,
         tileMap: tileMapLocal,
-        dimensions: {
-          x: action.payload.x,
-          y: action.payload.y
-        },
         saved: false
       };
     }

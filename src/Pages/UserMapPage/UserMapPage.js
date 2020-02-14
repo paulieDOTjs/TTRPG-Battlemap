@@ -4,7 +4,7 @@ import MapFinder from "../../Components/MapFinder/MapFinder";
 import { AuthContext } from "../../State/auth/auth";
 
 function UserMapPage(props) {
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="UserMapPage">
