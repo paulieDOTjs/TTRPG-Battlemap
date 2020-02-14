@@ -34,6 +34,17 @@ const initialState = {
       }
     },
     {
+      name: "Kaaglank Cragmolder",
+      characterID: uuid(),
+      movespeed: "25",
+      initiative: 18,
+      color: "grey",
+      position: {
+        x: 8,
+        y: 2
+      }
+    },
+    {
       name: "Mira Riverthorn",
       characterID: uuid(),
       movespeed: "35",

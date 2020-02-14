@@ -50,7 +50,7 @@ export default function reducer(state, action) {
       for (let i = 0; i < newTileMap.length; i++) {
         newTileMap[i] = row;
       }
-      return { ...state, tileMap: newTileMap };
+      return { ...state, tileMap: newTileMap, saved: false };
     }
 
     case UPDATE_MAP_ZOOM: {
