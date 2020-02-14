@@ -84,14 +84,14 @@ export default function reducer(state, action) {
     }
 
     case SAVE_MAP: {
-      console.log(state);
+      console.log(state.createdBy);
       const saveData = {
         name: state.mapName,
         tileMap: state.tileMap,
         savedBy: state.username,
-        creator: state.createdBy === null ? state.createdBy : state.username,
+        creator: state.createdBy === null ? state.username : state.createdBy,
         editedBy: state.username,
-        private: state.private
+        private: state.username === state.createdBy ? state.private : true
       };
 
       superagent
