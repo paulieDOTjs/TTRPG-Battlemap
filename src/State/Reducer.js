@@ -277,17 +277,28 @@ export default function reducer(state, action) {
       //Temporary version of the tileMap
       let tileMapLocal = [...state.tileMap];
 
+      let xValueRecived = action.payload.x;
+      let yValueRecived = action.payload.y;
+
+      if (xValueRecived < 1) {
+        xValueRecived = 1;
+      }
+
+      if (yValueRecived < 1) {
+        yValueRecived = 1;
+      }
+
       //Shortens tileMap to be the new inputted value
-      if (tileMapLocal[0].length > action.payload.x) {
+      if (tileMapLocal[0].length > xValueRecived) {
         tileMapLocal.map((key, value) => {
-          const x = key.slice(0, action.payload.x);
+          const x = key.slice(0, xValueRecived);
           tileMapLocal[value] = x;
         });
       }
 
       //Adds blank columns to the right of the current columns
-      if (tileMapLocal[0].length < action.payload.x) {
-        const newColumnNumber = action.payload.x - tileMapLocal[0].length;
+      if (tileMapLocal[0].length < xValueRecived) {
+        const newColumnNumber = xValueRecived - tileMapLocal[0].length;
         let additionalColumns = "";
         for (let i = 0; i < newColumnNumber; i++) {
           additionalColumns = additionalColumns + 0;
@@ -299,19 +310,19 @@ export default function reducer(state, action) {
       }
 
       //Reduces the length of the array based the new incoming y
-      if (tileMapLocal.length > action.payload.y) {
-        tileMapLocal = tileMapLocal.slice(0, action.payload.y);
+      if (tileMapLocal.length > yValueRecived) {
+        tileMapLocal = tileMapLocal.slice(0, yValueRecived);
       }
 
       //Reduces the length of the array based the new incoming y
-      if (tileMapLocal.length < action.payload.y) {
+      if (tileMapLocal.length < yValueRecived) {
         let additionalColumns = "";
 
-        for (let i = 0; i < action.payload.x; i++) {
+        for (let i = 0; i < xValueRecived; i++) {
           additionalColumns = additionalColumns + 0;
         }
 
-        const rowDifference = action.payload.y - tileMapLocal.length;
+        const rowDifference = yValueRecived - tileMapLocal.length;
         for (let i = 0; i < rowDifference; i++) {
           tileMapLocal.push(additionalColumns);
         }
