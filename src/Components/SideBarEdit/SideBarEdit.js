@@ -115,10 +115,10 @@ function SideBarEdit(props) {
               <input
                 value={mapInfo.x}
                 onChange={({ target }) => {
-                  if (target.value > 64) {
-                    setMapInfo({ ...mapInfo, x: 64 });
-                  }
-                  setMapInfo({ ...mapInfo, x: target.value });
+                  setMapInfo({
+                    ...mapInfo,
+                    x: target.value > 64 ? 64 : target.value
+                  });
                 }}
               />
             </div>
@@ -129,7 +129,10 @@ function SideBarEdit(props) {
               <input
                 value={mapInfo.y}
                 onChange={({ target }) => {
-                  setMapInfo({ ...mapInfo, y: target.value });
+                  setMapInfo({
+                    ...mapInfo,
+                    y: target.value > 64 ? 64 : target.value
+                  });
                 }}
               />
             </div>
