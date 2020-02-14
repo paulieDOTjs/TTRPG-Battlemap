@@ -10,8 +10,7 @@ function HomePage(props) {
         TTRPG games, save them for later, and view maps others have made public.
       </h2>
       <h3>Want to proceed? Adventure awaits.</h3>
-      <a href="/play">button</a>
-      {props.children}
+      {/* {props.children} */}
     </div>
   );
 }
