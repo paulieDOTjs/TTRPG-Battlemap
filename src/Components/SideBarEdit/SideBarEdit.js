@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useContext } from "react";
+import superagent from "superagent";
 import "./SideBarEdit.css";
 import ObjectSelector from "../ObjectSelector/ObjectSelector";
 import Button from "../Button/Button";
@@ -9,7 +10,6 @@ import { GameContext } from "../../State/Context.js";
 
 function SideBarEdit(props) {
   const { state, dispatch } = useContext(GameContext);
-
   const [mapInfo, setMapInfo] = useState({
     x: state.tileMap[0].length,
     y: state.tileMap.length
@@ -17,7 +17,7 @@ function SideBarEdit(props) {
 
   const characters = [...state.characters];
 
-  function handleSubmit(e) {
+  function handleMapLayoutChange(e) {
     e.preventDefault();
     let newValues = mapInfo;
     newValues.x = parseInt(newValues.x);
@@ -27,6 +27,33 @@ function SideBarEdit(props) {
       type: Actions.CREATE_MAP,
       payload: newValues
     });
+  }
+
+  function handleSave() {
+    console.log(state);
+    const saveData = {
+      name: state.mapName,
+      tileMap: state.tileMap,
+      savedBy: state.username,
+      creator: state.creator === "" ? state.username : state.creator,
+      editedBy: state.editedBy,
+      private: state.private
+    };
+
+    console.log(saveData);
+
+    superagent
+      .post(process.env.REACT_APP_SERVER_URL + "/api/v1/maps")
+      .send(saveData) // sends a JSON post body
+      .end((err, res) => {
+        console.log("response", res);
+        console.log("error", err);
+        if (err === null) {
+          dispatch({
+            type: Actions.SAVE_MAP
+          });
+        }
+      });
   }
 
   return useMemo(() => {
@@ -47,7 +74,7 @@ function SideBarEdit(props) {
             </Button>
           </div>
           <div className="col-6">
-            <Button data-action={Actions.SAVE_MAP} style={{ minWidth: "100%" }}>
+            <Button onClick={handleSave} style={{ minWidth: "100%" }}>
               Save map
             </Button>
           </div>
@@ -108,7 +135,7 @@ function SideBarEdit(props) {
           </div>
         </div>
 
-        <form className="SetupForm" onSubmit={handleSubmit}>
+        <form className="SetupForm" onSubmit={handleMapLayoutChange}>
           <div className="row">
             <div className="col-6">Number of columns:</div>
             <div className="col-6">

@@ -33,6 +33,7 @@ function CharacterNumberQuestion(props) {
         <div className="col-6">
           <Button
             style={{ width: "100%", marginTop: "12px" }}
+            onClick={saveAllCharacters}
             data-action={Actions.ADD_CHARACTER}
           >
             Add a character

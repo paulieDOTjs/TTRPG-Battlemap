@@ -1,5 +1,4 @@
 import uuid from "uuid";
-import superagent from "superagent";
 
 import {
   MOVE_CHARACTER,
@@ -25,8 +24,8 @@ import {
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
-  console.log(state);
-  console.log(action.type);
+  console.log(state.editedBy);
+  console.log(state.creator);
   switch (action.type) {
     //Used for testing
     case NO_ACTION: {
@@ -70,12 +69,11 @@ export default function reducer(state, action) {
     }
 
     case USE_SELECTED_MAP: {
-      console.log(action.payload);
       return {
         ...state,
         tileMap: action.payload.tileMap,
         mapName: action.payload.name,
-        createdBy: action.payload.creator
+        creator: action.payload.creator
       };
     }
 
@@ -84,30 +82,10 @@ export default function reducer(state, action) {
     }
 
     case SAVE_MAP: {
-      console.log(state.createdBy);
-      const saveData = {
-        name: state.mapName,
-        tileMap: state.tileMap,
-        savedBy: state.username,
-        creator: state.createdBy === null ? state.username : state.createdBy,
-        editedBy: state.username,
-        private: state.username === state.createdBy ? state.private : true
-      };
-
-      superagent
-        .post(process.env.REACT_APP_SERVER_URL + "/api/v1/maps")
-        .send(saveData) // sends a JSON post body
-        .end((err, res) => {
-          console.log(err);
-          console.log(res);
-        });
-
       return { ...state, saved: true };
     }
 
     case ADD_CHARACTER: {
-      console.log(action.payload);
-      console.log(state.characters);
       const defaultCharacterInfo = {
         name: "Player",
         characterID: uuid(),
@@ -241,6 +219,7 @@ export default function reducer(state, action) {
         ...state,
         tileMap: newTileMap,
         selectedObject: selectedObject,
+        creator: state.creator === "" ? state.username : state.creator,
         saved: false
       };
     }
@@ -274,6 +253,11 @@ export default function reducer(state, action) {
     }
     //Creates the map based on state
     case CREATE_MAP: {
+      const editors = [...state.editedBy];
+
+      if (editors.find(editor => editor === state.username) === undefined) {
+        editors.push(state.username);
+      }
       //Temporary version of the tileMap
       let tileMapLocal = [...state.tileMap];
 
@@ -334,7 +318,8 @@ export default function reducer(state, action) {
       return {
         ...state,
         tileMap: tileMapLocal,
-        saved: false
+        saved: false,
+        editedBy: editors
       };
     }
 

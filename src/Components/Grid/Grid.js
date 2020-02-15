@@ -76,7 +76,7 @@ function Grid() {
         }}
       >
         <div className="Grid" style={styling}>
-          {characters}
+          {state.editMode ? "" : characters}
           {tiles}
         </div>
         <Resizer />
