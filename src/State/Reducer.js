@@ -49,7 +49,13 @@ export default function reducer(state, action) {
       for (let i = 0; i < newTileMap.length; i++) {
         newTileMap[i] = row;
       }
-      return { ...state, tileMap: newTileMap, saved: false };
+      return {
+        ...state,
+        tileMap: newTileMap,
+        saved: false,
+        creator: state.username,
+        editedBy: state.username
+      };
     }
 
     case UPDATE_MAP_ZOOM: {
@@ -215,12 +221,20 @@ export default function reducer(state, action) {
 
       //The new tileMap updated with the new row
       newTileMap[changingRow] = newRow;
+
+      const editors = [...state.editedBy];
+
+      if (editors.find(editor => editor === state.username) === undefined) {
+        editors.push(state.username);
+      }
+
       return {
         ...state,
         tileMap: newTileMap,
         selectedObject: selectedObject,
         creator: state.creator === "" ? state.username : state.creator,
-        saved: false
+        saved: false,
+        editedBy: editors
       };
     }
 
@@ -249,6 +263,7 @@ export default function reducer(state, action) {
     }
 
     case TOGGLE_PRIVATE_MAP: {
+      
       return { ...state, private: !state.private, saved: false };
     }
     //Creates the map based on state
