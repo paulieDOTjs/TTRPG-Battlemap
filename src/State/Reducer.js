@@ -79,6 +79,7 @@ export default function reducer(state, action) {
         ...state,
         tileMap: action.payload.tileMap,
         mapName: action.payload.name,
+        saved: true,
         creator: action.payload.creator
       };
     }
@@ -263,7 +264,6 @@ export default function reducer(state, action) {
     }
 
     case TOGGLE_PRIVATE_MAP: {
-      
       return { ...state, private: !state.private, saved: false };
     }
     //Creates the map based on state
