@@ -89,6 +89,17 @@ function MapFinder(props) {
                       >
                         Delete
                       </Button>
+                    ) : state.username === "God" ? (
+                      <Button
+                        style={{
+                          padding: "4px",
+                          width: "108px",
+                          marginLeft: "20px"
+                        }}
+                        onClick={() => handleDelete(individualMapData._id)}
+                      >
+                        Delete
+                      </Button>
                     ) : (
                       ""
                     )}
