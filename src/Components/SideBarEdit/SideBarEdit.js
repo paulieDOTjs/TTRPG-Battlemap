@@ -40,8 +40,6 @@ function SideBarEdit(props) {
       private: state.private
     };
 
-    console.log(saveData);
-
     superagent
       .post(process.env.REACT_APP_SERVER_URL + "/api/v1/maps")
       .send(saveData) // sends a JSON post body

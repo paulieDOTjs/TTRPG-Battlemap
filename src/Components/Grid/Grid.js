@@ -6,7 +6,6 @@ import Resizer from "../Resizer/Resizer";
 import { GameContext } from "../../State/Context.js";
 
 function Grid() {
-  console.log("Grid rerender");
   //Gets state from context
   const { state } = useContext(GameContext);
 
@@ -16,7 +15,11 @@ function Grid() {
 
   for (let i = 0; i < state.characters.length; i++) {
     characters.push(
-      <Character key={"character" + i} props={state.characters[i]} />
+      <Character
+        key={"character" + i}
+        props={state.characters[i]}
+        highlight={i === state.turn ? "true" : "false"}
+      />
     );
   }
 
@@ -82,7 +85,7 @@ function Grid() {
         <Resizer />
       </div>
     );
-  }, [state.tileMap, state.characters, state.tileSize]);
+  }, [state.tileMap, state.characters, state.tileSize, state.turn]);
 }
 
 export default Grid;

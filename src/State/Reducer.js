@@ -24,8 +24,7 @@ import {
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
 export default function reducer(state, action) {
-  console.log(state.editedBy);
-  console.log(state.creator);
+  console.log(state.tileMap);
   switch (action.type) {
     //Used for testing
     case NO_ACTION: {

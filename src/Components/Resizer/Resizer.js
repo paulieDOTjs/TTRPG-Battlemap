@@ -31,16 +31,16 @@ function Resizer(props) {
       </div>
       <div className="row">
         <div className="col-6">
+          <Button style={{ width: "100%" }} onClick={handleMinus}>
+            -
+          </Button>
+        </div>
+        <div className="col-6">
           <Button
             style={{ width: "100%", marginRight: "10px" }}
             onClick={handlePlus}
           >
             +
-          </Button>
-        </div>
-        <div className="col-6">
-          <Button style={{ width: "100%" }} onClick={handleMinus}>
-            -
           </Button>
         </div>
       </div>
