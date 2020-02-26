@@ -2,7 +2,7 @@ import * as Actions from "../State/Actions";
 
 import { tileMapDirectory } from "../Utils/tileMapDirectory";
 
-function useHandleKey(passedState, e) {
+function moveCharacter(passedState, e) {
   const state = { ...passedState };
 
   function keepInGrid(object) {
@@ -32,22 +32,18 @@ function useHandleKey(passedState, e) {
 
   //If it is not edit mode
   if (state.editMode) {
-    return [null, state];
-  }
-
-  if (e.code === "Enter") {
-    return [Actions.END_TURN, state];
+    return state;
   }
 
   //If the character has no remaining move speed they cannot move.
   if (movespeedRemaining < 5) {
-    return [null, state];
+    return state;
   }
 
   //Pulls in current position from state to do some math on
   let newPosition = { ...characters[state.turn].position };
 
-  if (e.code === "KeyQ" || e.code === "KeyA" || e.code === "KeyZ") {
+  if (e.code === "KeyA") {
     //Gets the value of the tile that the character is trying to move to
     try {
       let desiredTileValue = tileMap[newPosition.y - 1].charAt(
@@ -63,7 +59,7 @@ function useHandleKey(passedState, e) {
       keepInGrid(newPosition);
     }
   }
-  if (e.code === "KeyE" || e.code === "KeyD" || e.code === "KeyX") {
+  if (e.code === "KeyD") {
     try {
       let desiredTileValue = tileMap[newPosition.y - 1].charAt(newPosition.x);
       if (tileMapDirectory[desiredTileValue].passable) {
@@ -74,7 +70,7 @@ function useHandleKey(passedState, e) {
       keepInGrid(newPosition);
     }
   }
-  if (e.code === "KeyS" || e.code === "KeyZ" || e.code === "KeyX") {
+  if (e.code === "KeyS") {
     try {
       let desiredTileValue = tileMap[newPosition.y].charAt(newPosition.x - 1);
       if (tileMapDirectory[desiredTileValue].passable) {
@@ -85,13 +81,59 @@ function useHandleKey(passedState, e) {
       keepInGrid(newPosition);
     }
   }
-  if (e.code === "KeyQ" || e.code === "KeyW" || e.code === "KeyE") {
+  if (e.code === "KeyW") {
     try {
       let desiredTileValue = tileMap[newPosition.y - 2].charAt(
         newPosition.x - 1
       );
       if (tileMapDirectory[desiredTileValue].passable) {
         newPosition.y--;
+      }
+      keepInGrid(newPosition);
+    } catch {
+      keepInGrid(newPosition);
+    }
+  }
+  if (e.code === "KeyQ") {
+    try {
+      let desiredTileValue = tileMap[newPosition.y - 2].charAt(
+        newPosition.x - 2
+      );
+      if (tileMapDirectory[desiredTileValue].passable) {
+        newPosition.y-- && newPosition.x--;
+      }
+      keepInGrid(newPosition);
+    } catch {
+      keepInGrid(newPosition);
+    }
+  }
+  if (e.code === "KeyE") {
+    try {
+      let desiredTileValue = tileMap[newPosition.y - 2].charAt(newPosition.x);
+      if (tileMapDirectory[desiredTileValue].passable) {
+        newPosition.y-- && newPosition.x++;
+      }
+      keepInGrid(newPosition);
+    } catch {
+      keepInGrid(newPosition);
+    }
+  }
+  if (e.code === "KeyZ") {
+    try {
+      let desiredTileValue = tileMap[newPosition.y].charAt(newPosition.x - 2);
+      if (tileMapDirectory[desiredTileValue].passable) {
+        newPosition.y++ && newPosition.x--;
+      }
+      keepInGrid(newPosition);
+    } catch {
+      keepInGrid(newPosition);
+    }
+  }
+  if (e.code === "KeyX") {
+    try {
+      let desiredTileValue = tileMap[newPosition.y].charAt(newPosition.x);
+      if (tileMapDirectory[desiredTileValue].passable) {
+        newPosition.y++ && newPosition.x++;
       }
       keepInGrid(newPosition);
     } catch {
@@ -124,7 +166,7 @@ function useHandleKey(passedState, e) {
       movespeedRemaining = movespeedRemaining - 10;
       //If a diagonal move is attempted and it will take 10, but only 5 is remaining it will stop it.
       if (movespeedRemaining === -5) {
-        return [null, state];
+        return state;
       }
       pseudoState.diagMove = false;
     } else if (
@@ -143,7 +185,7 @@ function useHandleKey(passedState, e) {
   state.movespeedRemaining = movespeedRemaining;
   state.diagMove = pseudoState.diagMove;
 
-  return [Actions.MOVE_CHARACTER, state];
+  return state;
 }
 
-export default useHandleKey;
+export default moveCharacter;

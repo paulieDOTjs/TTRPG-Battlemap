@@ -22,6 +22,7 @@ import {
   CLEAR_MAP,
   UPDATE_MAP_ZOOM
 } from "./Actions";
+import moveCharacter from "../Hooks/moveCharacter";
 
 export default function Reducer(state, action) {
   switch (action.type) {
@@ -66,8 +67,8 @@ export default function Reducer(state, action) {
       if (currentSize > 5) {
         currentSize = 5;
       }
-      if (currentSize < 0.5) {
-        currentSize = 0.5;
+      if (currentSize < 1) {
+        currentSize = 1;
       }
       return { ...state, tileSize: currentSize };
     }
@@ -337,7 +338,9 @@ export default function Reducer(state, action) {
     }
 
     case MOVE_CHARACTER: {
-      return { ...state, ...action.payload };
+      const response = moveCharacter(state, action.payload);
+
+      return { ...state, ...response };
     }
     default: {
       throw new Error("UNKOWN ACTION:", action.type);

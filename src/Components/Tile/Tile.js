@@ -106,7 +106,6 @@ function Tile(props) {
       </div>
     );
   }, [
-    state.tileMap[thisTileRow],
     props,
     state.editMode,
     tileMapThisRowAndCol,
