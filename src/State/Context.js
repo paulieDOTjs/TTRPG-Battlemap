@@ -1,14 +1,14 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import uuid from "uuid";
 
 import Reducer from "./Reducer";
 import * as Actions from "./Actions";
+import useHandleKey from "../Hooks/useHandleKey";
 
 export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: true,
+  editMode: false,
   selectedObject: 1,
   tileSize: 3,
   turn: 0,
@@ -56,24 +56,22 @@ export default function GameProvider(props) {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   function HandleKey(e) {
-    if (!state.editMode) {
-      if (e.code === "Enter") {
-        dispatch({
-          type: Actions.END_TURN,
-          payload: e.code
-        });
-      }
-      dispatch({
-        type: Actions.MOVE_CHARACTER,
-        payload: e.code
-      });
+    const [dispatchType, payload] = useHandleKey({ ...state }, e);
+
+    if (dispatchType === null) {
+      return;
     }
+
+    dispatch({
+      type: dispatchType,
+      payload: payload
+    });
   }
 
   useEffect(() => {
     window.addEventListener("keydown", HandleKey);
     return () => window.removeEventListener("keydown", HandleKey);
-  }, [state.editMode]);
+  }, [state]);
 
   function handleClick(e) {
     try {

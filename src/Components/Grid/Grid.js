@@ -7,7 +7,7 @@ import { GameContext } from "../../State/Context.js";
 
 function Grid() {
   //Gets state from context
-  const { state } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
 
   //An array that will hold all the tiles to be placed on the grid
   const tiles = [];
