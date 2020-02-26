@@ -8,14 +8,12 @@ function Resizer(props) {
   const { dispatch } = useContext(GameContext);
 
   function handlePlus(e) {
-    console.log(e);
     dispatch({
       type: Actions.UPDATE_MAP_ZOOM,
       payload: "plus"
     });
   }
   function handleMinus(e) {
-    console.log(e);
     dispatch({
       type: Actions.UPDATE_MAP_ZOOM,
       payload: "minus"

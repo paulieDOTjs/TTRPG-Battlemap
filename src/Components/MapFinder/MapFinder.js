@@ -61,8 +61,22 @@ function MapFinder(props) {
         {mapsFound.length < 1
           ? "...loading"
           : mapsFound.map(individualMapData => {
+              const editors = [];
+              for (let i = 0; i < individualMapData.editedBy.length; i++) {
+                if (i === 0) {
+                  editors.push(individualMapData.editedBy[i]);
+                } else if (i === individualMapData.editedBy.length - 1) {
+                  editors.push(", and " + individualMapData.editedBy[i]);
+                } else {
+                  editors.push(", " + individualMapData.editedBy[i]);
+                }
+              }
+
               return (
-                <div className="MapBox">
+                <div
+                  className="MapBox"
+                  key={individualMapData._id + individualMapData.name + "div"}
+                >
                   <h2
                     key={individualMapData._id + individualMapData.name}
                     style={{ textAlign: "center" }}
@@ -113,6 +127,12 @@ function MapFinder(props) {
                     key={individualMapData._id + individualMapData.creator}
                   >
                     Created by: {individualMapData.creator}
+                  </h3>
+                  <h3
+                    style={{ textAlign: "center" }}
+                    key={individualMapData._id + individualMapData.creator}
+                  >
+                    Edited by: {editors}
                   </h3>
                 </div>
               );

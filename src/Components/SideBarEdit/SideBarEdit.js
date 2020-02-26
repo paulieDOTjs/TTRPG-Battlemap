@@ -30,7 +30,6 @@ function SideBarEdit(props) {
   }
 
   function handleSave() {
-    console.log(state);
     const saveData = {
       name: state.mapName,
       tileMap: state.tileMap,

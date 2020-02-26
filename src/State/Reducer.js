@@ -78,6 +78,7 @@ export default function Reducer(state, action) {
         ...state,
         tileMap: action.payload.tileMap,
         mapName: action.payload.name,
+        editedBy: action.payload.editedBy,
         saved: true,
         creator: action.payload.creator
       };
