@@ -7,7 +7,7 @@ export const GameContext = createContext();
 
 // const initialState = CreateState;
 const initialState = {
-  editMode: false,
+  editMode: true,
   selectedObject: 1,
   tileSize: 3,
   turn: 0,
